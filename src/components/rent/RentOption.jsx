@@ -30,6 +30,9 @@ const RentOption = () => {
         {
             imgUrl: '/images/mobile_rent_bike_09.png',
         },
+        {
+            imgUrl: '/images/mobile_rent_bike_10.png',
+        },
     ];
 
     const rentOptionList02 = [

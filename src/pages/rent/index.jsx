@@ -240,7 +240,7 @@ const Rent = () => {
       {/* rsc 보장 범위 시작 */}
       <homeStyle.Section background={isMobile ? "#fff" : "#f8f8f8"} padding={isMobile ? "0 0 150px 0" : "104.5px 0 185.5px 0"}>
         <homeStyle.PageWidth>
-          {isMobile ? <TitleList noneNum subtitle="RCS 보장 범위" desc1='종합보험 대비' desc2='저렴한 비용, 폭 넓은 보장' /> : <TitleList noneNum nonSubtitle noDesc bold="RCS 보장 범위" />}
+          {isMobile ? <TitleList noneNum subtitle="RCS 보장 범위" /> : <TitleList noneNum nonSubtitle noDesc bold="RCS 보장 범위" />}
           {!isMobile && <p className="rscdesc">&lt;남자 30세 이상 유상보험 기준 비교&gt;</p>}
         </homeStyle.PageWidth>
         <homeStyle.Area>

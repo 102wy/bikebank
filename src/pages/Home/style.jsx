@@ -69,6 +69,14 @@ export const PageWidth = styled.div`
     letter-spacing: -0.4px;
     margin: 16px 0 10px 0;
   }
+  .rscSubtitle {
+    font-size:16px;
+    line-height:22px;
+    letter-spacing:-0.64px;
+    color: #272727;
+    margin: 10px 0 30px 0;
+    font-weight:700;
+  }
 `;
 
 export const Title = styled.p`
