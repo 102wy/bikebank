@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import AOS from 'aos';
 
 const RentOption = () => {
     const rentOptionList01 = [
@@ -99,12 +100,19 @@ const RentOption = () => {
             title: '만 24세 이상',
         },
     ];
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1800,
+        })
+    }, [])
+
     return (
         <Wrap>
             <p className='title'>차량 기종</p>
             <MobileRentOptionList isCenter>
                 {rentOptionList01.map((item, idx) => (
-                    <li key={idx}>
+                    <li key={idx} data-aos="fade-up" data-aos-duration="1800" >
                         <img src={item.imgUrl} alt='차량 기종 이미지' className='option' />
                     </li>
                 ))}
@@ -112,7 +120,7 @@ const RentOption = () => {
             <p className='title'>렌트 종류</p>
             <MobileRentOptionList height='200px' isDesc>
                 {rentOptionList02.map((item, idx) => (
-                    <li key={idx}>
+                    <li key={idx} data-aos="fade-up" data-aos-duration="1800">
                         <img src={item.imgUrl} alt='렌트 종류 이미지' />
                         <p>{item.title}<br /><span>{item.desc}</span></p>
                     </li>
@@ -121,7 +129,7 @@ const RentOption = () => {
             <p className='title'>인수 여부</p>
             <MobileRentOptionList height='204px' imgHeight='150px'>
                 {rentOptionList03.map((item, idx) => (
-                    <li key={idx}>
+                    <li key={idx} data-aos="fade-up" data-aos-duration="1800">
                         <img src={item.imgUrl} alt='인수 여부 이미지' />
                         <p>{item.title}</p>
                     </li>
@@ -129,7 +137,7 @@ const RentOption = () => {
             </MobileRentOptionList>
             <MobileRentOptionList height='204px' imgHeight='150px'>
                 {rentOptionList04.map((item, idx) => (
-                    <li key={idx}>
+                    <li key={idx} data-aos="fade-up" data-aos-duration="1800">
                         <img src={item.imgUrl} alt='인수 여부 이미지' />
                         <p>{item.title}</p>
                     </li>

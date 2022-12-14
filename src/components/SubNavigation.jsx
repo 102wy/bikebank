@@ -60,8 +60,13 @@ const Wrap = styled.div`
 
 const SubNav = styled.ul`
   display: flex;
-  flex-wrap: nowrap;
-  overflow: scroll;
+  flex-wrap: nowrap;  
+  @media screen and (max-width: ${(props) => props.theme.breakpoint.mobile}) {
+    overflow: scroll;
+    ::-webkit-scrollbar {
+        display: none;
+      }
+  }
 `;
 
 const SubNavList = styled.li`

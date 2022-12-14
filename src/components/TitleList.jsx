@@ -49,8 +49,8 @@ const Wrap = styled.div`
         ${(props) =>
     props.isMobile &&
     css`
-            display: block;
-          `}
+        display: block;
+      `}
       }
     }
   }
@@ -71,7 +71,6 @@ const Wrap = styled.div`
       font-weight: 700;
       line-height: 30px;
       letter-spacing: -1.1px;
-      margin-bottom: 10px;
     }
   }
 `;

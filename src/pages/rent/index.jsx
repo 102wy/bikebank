@@ -1,12 +1,14 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import RentOption from '../../components/rent/RentOption';
 import RentService from '../../components/rent/RentService';
+import RscCaseItem from '../../components/rent/RscCaseItem';
 import SubNavigation from '../../components/SubNavigation';
 import SubTitleSection from '../../components/SubTitleSection';
 import TitleList from '../../components/TitleList';
 import { mobileContext } from '../../utils/mobileContext';
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
+import AOS from 'aos';
 
 const Rent = () => {
   const pageRef = useRef([]);
@@ -85,7 +87,74 @@ const Rent = () => {
       imgUrl: '/images/rent_tab01_04.png',
     },
   ];
-
+  const rscCaseList = [
+    {
+      id: 1,
+      title: '횡단보도 보행자 충돌 사고',
+      children: [{
+        id: 10,
+        desc: '2020년 12월 04일 경기도 안산시 단원구 도로에서 라이더가 횡단보도 보행자와 충돌 (적색신호 변경된 시점) 피해자 과실 10%',
+        normalPrice: '라이더 부담 금액 \n총 23,411,700원',
+        RSCprice: '라이더 부담 금액\n0원',
+        isToggle: false,
+      }]
+    },
+    {
+      id: 2,
+      title: '가로수와 충돌한 사고',
+      children: [{
+        id: 20,
+        desc: '2020년 09월 1일 경기도 부천시 도로에서 역주행하여 주행중 마주오던 차량을 피하려나 가로수와 충돌하여 사망하는 사고',
+        normalPrice: '보상금액\n0원',
+        RSCprice: '라이더 보상 금액\n50,000,000원',
+        isToggle: false,
+      }]
+    },
+    {
+      id: 3,
+      title: '교차로 신호위반 충돌',
+      children: [{
+        id: 30,
+        desc: '2020년 04월 21일 경기도 부천시 교차로에서 라이더가 신호위반하여 직전하던 차량과 충돌한 사고 (자차 과실 70%)',
+        normalPrice: '라이더 부담 금액\n총 59,204,352원',
+        RSCprice: '라이더 부담 금액\n0원',
+        isToggle: false,
+      }]
+    },
+    {
+      id: 4,
+      title: '횡단보도 보행자 충돌 사고',
+      children: [{
+        id: 40,
+        desc: '2020년 05월 11일 경기도 의정부시 평화로 소재 도로에서 횡단보도를 보행하던 피해자와 충돌한 사고. (횡단보도 사고) 자차 과실 50%',
+        normalPrice: '라이더 부담 금액\n총 19,183,975원',
+        RSCprice: '라이더 부담 금액\n0원',
+        isToggle: false,
+      }]
+    },
+    {
+      id: 5,
+      title: '교차로 비접촉 사고',
+      children: [{
+        id: 50,
+        desc: '2020년 08월 30일 서울시 강서구 도로에서 불법 유턴하는 택시를 피하려다 라이더가 넘어지는 비접촉 사고 (자차과실 0%)',
+        normalPrice: '라이더 보상 금액\n총 0원',
+        RSCprice: '라이더 보상 금액\n9,480,000원',
+        isToggle: false,
+      }]
+    },
+    {
+      id: 6,
+      title: '무단횡단 피해자와 충돌 사고',
+      children: [{
+        id: 60,
+        desc: '2020년 03월 9일 서울시 종로구 이면도로에서 라이더가 무단횡단을 하던 피해자와 충돌한 사고 (자차과실 20%)',
+        normalPrice: '라이더 부담 금액\n총 31,769,040원',
+        RSCprice: '라이더 부담 금액\n0원',
+        isToggle: false,
+      }]
+    },
+  ];
   const rentList04 = [
     {
       id: 0,
@@ -106,8 +175,15 @@ const Rent = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [serviceTab, setServiceTab] = useState(0);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1800,
+    })
+  }, [])
+
   return (
     <>
+      {/* 공통 헤더부분 */}
       <SubTitleSection title="렌트상품" />
       <SubNavigation pageRef={pageRef} navlist={subNavList} />
 
@@ -125,11 +201,11 @@ const Rent = () => {
             desc1="*배달업 사업자전용"
             descright
           />
-          {!isMobile && <div className="rentImg">
+          {!isMobile && <div className="rentImg" data-aos="fade-up" data-aos-duration="1800">
             <img src="/images/rent_01.png" alt="렌트 이미지" />
           </div>
           }
-          <style.RentList isMobile={isMobile}>
+          <style.RentList isMobile={isMobile} data-aos="fade-up" data-aos-duration="1800" >
             {rentList01.map((item) => (
               <li key={item.id}>
                 <p className="number">{item.id}</p>
@@ -169,10 +245,10 @@ const Rent = () => {
           />
           {/* 모바일 유무에 따른 화면배치 변경 */}
           {isMobile ? (
-            <RentOption />
+            <RentOption data-aos="fade-up" />
           ) : (
             <>
-              <style.RentOptionList>
+              <style.RentOptionList data-aos="fade-up" data-aos-duration="1800">
                 {rentList02.map((item) => (
                   <li
                     key={item.id}
@@ -183,7 +259,7 @@ const Rent = () => {
                   </li>
                 ))}
               </style.RentOptionList>
-              <style.RnetOptionCont>
+              <style.RnetOptionCont data-aos="fade-up" data-aos-duration="1800">
                 <img src={rentList02[currentTab].imgUrl} alt="렌트이미지" />
               </style.RnetOptionCont>
             </>
@@ -207,7 +283,7 @@ const Rent = () => {
           />
           <style.RcsWrap>
             {/* RSC 사고 보장 안내 시작 */}
-            <style.RscCont>
+            <style.RscCont data-aos="fade-up" data-aos-duration="1800" data-aos-delay="0">
               <img src="/images/rcs_img_01.png" alt="RSC 이미지" />
               <div>
                 <p>횡단보도 보행자 충돌 사고</p>
@@ -218,14 +294,14 @@ const Rent = () => {
               </div>
             </style.RscCont>
             <style.RscSection>
-              <style.RscDesc>
+              <style.RscDesc data-aos="fade-up" data-aos-duration="1800" data-aos-delay="150">
                 <p>일반 책임보험 차량 이용시</p>
                 <p className="bold">
                   라이더 부담 금액 <br />총 74,144,696원
                 </p>
                 {isMobile ? <p>&#42;벌금 라이더 부담</p> : <p>&#60;벌금 라이더 부담&#62;</p>}
               </style.RscDesc>
-              <style.RscDesc>
+              <style.RscDesc data-aos="fade-up" data-aos-duration="1800" data-aos-delay="150">
                 <p>바이크뱅크 RCS 차량 이용시</p>
                 <p className="primarybold">
                   양산시 김OO 지점장 부담 금액
@@ -247,16 +323,16 @@ const Rent = () => {
           {/* 모바일 유무에 따른 이미지 & 설명 변경 */}
           {isMobile ? (
             <>
-              <img src="/images/mobile_rent_rcs_02.png" alt="RSC 보장 범위" />
+              <img src="/images/mobile_rent_rcs_02.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
               <p className='rscdesc'>책임보험의 보상범위를 확대하여<br />
                 <span>대인 무한, 대물 2억, 상해보험</span>까지 보장</p>
-              <img src="/images/mobile_rent_rcs_03.png" alt="RSC 보장 범위" />
-              <img src="/images/mobile_rent_rcs_04.png" alt="RSC 보장 범위" />
+              <img src="/images/mobile_rent_rcs_03.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
+              <img src="/images/mobile_rent_rcs_04.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
             </>
           ) : (
             <>
-              <img src="/images/rcs_img_02.png" alt="RSC 보장 범위" />
-              <img src="/images/rcs_img_03.png" alt="RSC 보장 범위" />
+              <img src="/images/rcs_img_02.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
+              <img src="/images/rcs_img_03.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
             </>
           )}
           <homeStyle.Button
@@ -270,9 +346,15 @@ const Rent = () => {
           </homeStyle.Button>
         </homeStyle.Area>
       </homeStyle.Section>
-      <homeStyle.Section padding="126.5px 0 190px 0">
+      <homeStyle.Section padding={isMobile ? "0 0 100px 0" : "126.5px 0 190px 0"}>
         <homeStyle.PageWidth>
-          <TitleList noneNum nonSubtitle noDesc bold="실제 보장사례" />
+          {/* 실제 보장사례 토글 메뉴 */}
+          <TitleList noneNum noDesc subtitle='실제 보장사례' />
+          <style.RscCaseList data-aos="fade-up" data-aos-duration="1800" >
+            {rscCaseList.map(item => (
+              <RscCaseItem item={item} key={item.id} />
+            ))}
+          </style.RscCaseList>
         </homeStyle.PageWidth>
       </homeStyle.Section>
 
@@ -288,8 +370,8 @@ const Rent = () => {
           {isMobile ? (
             <RentService />
           ) : (
-            <>
-              <style.RentOptionList width="50%">
+            <React.Fragment >
+              <style.RentOptionList width="50%" data-aos="fade-up" data-aos-duration="1800" >
                 {rentList04.map((item) => (
                   <li
                     key={item.id}
@@ -300,10 +382,10 @@ const Rent = () => {
                   </li>
                 ))}
               </style.RentOptionList>
-              <style.RnetOptionCont>
+              <style.RnetOptionCont data-aos="fade-up" data-aos-duration="1800" >
                 <img src={rentList04[serviceTab].imgUrl} alt="렌트 서비스 이미지" />
               </style.RnetOptionCont>
-            </>
+            </React.Fragment>
           )}
         </homeStyle.PageWidth>
       </homeStyle.Section>
