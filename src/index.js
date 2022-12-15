@@ -12,6 +12,7 @@ import Sale from './pages/sale';
 import Customer from './pages/customer';
 import Recruit from './pages/recruit';
 import Home from './pages/Home';
+import SaleItem from './pages/saleitem/index';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -35,6 +36,12 @@ const router = createBrowserRouter([
       {
         path: 'sale',
         element: <Sale />,
+        children: [
+          {
+            path: ':id',
+            element: <SaleItem />,
+          },
+        ],
       },
       {
         path: 'customer',

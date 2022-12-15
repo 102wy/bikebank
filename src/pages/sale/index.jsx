@@ -60,7 +60,7 @@ const Sale = () => {
 
   return <>
     {/* 공통 헤더부분 */}
-    <SubTitleSection title="렌트상품" />
+    <SubTitleSection title="차량판매" />
     <SubNavigation pageRef={pageRef} navlist={subNavList} />
 
     {/* 01. 완성차 라인업 */}
