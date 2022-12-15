@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import AOS from 'aos';
 
-const Option = ({ title, desc, mb }) => {
+const Option = ({ title, desc, mb, delay }) => {
+    useEffect(() => {
+        AOS.init({ duration: 1800, });
+    }, []);
     return (
-        <Content mb={mb}>
+        <Content mb={mb} data-aos="fade-up" data-aos-duration="1800" data-aos-delay={delay}>
             <p className='title'>{title}</p>
             <p className='desc'>
                 {desc.split(`<br/>`).map(txt => (

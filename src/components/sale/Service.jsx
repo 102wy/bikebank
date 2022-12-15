@@ -31,5 +31,24 @@ const ServiceList = styled.li`
         color: #5d5d5d;
         white-space: pre-wrap;
     }
-    
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        padding: 19px 0 20px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        border-top: 1px solid #e1e1e1;
+        &:last-child {
+            border-bottom: 1px solid #e1e1e1;
+        }
+        .title {
+            font-size: 18px;
+            letter-spacing: -0.45px;
+            line-height: 26px;
+        }
+        p {
+            font-size: 16px;
+            letter-spacing: -0.64px;
+            line-height: 26px;
+        }
+    }
 `

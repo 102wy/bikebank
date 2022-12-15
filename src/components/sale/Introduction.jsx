@@ -1,21 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import { mobileContext } from '../../utils/mobileContext'
+// swiper 사용을 위한 import 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation, Autoplay } from 'swiper';
-import { mobileContext } from '../../utils/mobileContext';
+// AOS 스크롤 이벤트
+import AOS from 'aos';
 
 const Introduction = () => {
     const { isMobile } = useContext(mobileContext);
+    useEffect(() => {
+        AOS.init({ duration: 1800, })
+    }, [])
     return (
         <>
             <BikeList>
-                <li><img src="/images/a_vsx125.png" alt="vsx125 사진" /></li>
-                <li><img src="/images/a_vs125.png" alt="vs125 사진" /></li>
-                <li><img src="/images/a_vs300.png" alt="vs300 사진" /></li>
+                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="0"><img src="/images/a_vsx125.png" alt="vsx125 사진" /></li>
+                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="100"><img src="/images/a_vs125.png" alt="vs125 사진" /></li>
+                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="200"><img src="/images/a_vs300.png" alt="vs300 사진" /></li>
             </BikeList>
-            <Wrap isMobile={isMobile}>
+            <Wrap isMobile={isMobile} data-aos={!isMobile && "fade-up"} data-aos-duration="1800">
                 <SwiperWrap loop={true} slidesPerView={1} spaceBetween={92} modules={[Navigation, Autoplay]} autoplay={true} navigation={true}>
                     <SwiperSlide>
                         <div className='swipercont'>

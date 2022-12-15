@@ -89,4 +89,14 @@ export const Button = styled.button`
     color: #f8f8f8;
     margin: 0 auto;
     cursor: pointer;
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: -0.56px;
+        color: #5d5d5d;
+        background-color: #fff;
+        border: 1px solid #707070;
+        width: 180px;
+        height: 44px;
+    }
 `

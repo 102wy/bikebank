@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import Introduction from '../../components/sale/Introduction';
 import MobileOption from '../../components/sale/MobileOption';
 import Option from '../../components/sale/Option';
@@ -7,6 +7,7 @@ import SubNavigation from '../../components/SubNavigation';
 import SubTitleSection from '../../components/SubTitleSection';
 import TitleList from '../../components/TitleList';
 import { mobileContext } from '../../utils/mobileContext';
+import AOS from 'aos'
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
 
@@ -53,6 +54,10 @@ const Sale = () => {
     },
   ]
 
+  useEffect(() => {
+    AOS.init({ duration: 1800, })
+  }, [])
+
   return <>
     {/* 공통 헤더부분 */}
     <SubTitleSection title="렌트상품" />
@@ -98,8 +103,12 @@ const Sale = () => {
         ) : (
           <>
             <style.OptionList>
-              <Option title='제품보증기간' desc='신차 구입 후 부품에 따라 1~2년 이내,<br/>또는 주행거리 10,000~20,000km<br/>(선도래 조건)' mb='20px' />
-              <Option title='보증대상부품' desc='모터사이클을 구성하는 모든 부품<br/>(단 소모성 부품 및 유지류는 제외)' mb='20px' />
+              <Option title='제품보증기간' desc='신차 구입 후 부품에 따라 1~2년 이내,<br/>또는 주행거리 10,000~20,000km<br/>(선도래 조건)' mb='20px'
+                delay='0'
+              />
+              <Option title='보증대상부품' desc='모터사이클을 구성하는 모든 부품<br/>(단 소모성 부품 및 유지류는 제외)' mb='20px'
+                delay='100'
+              />
             </style.OptionList>
           </>
         )}
@@ -130,11 +139,15 @@ const Sale = () => {
           />
         ) : (
           <style.OptionList>
-            <Option title='APP 설치 및 등록' desc='신차 구입 후 동봉된 QR코드를 이용하여<br/>APP설치 후 신차 등록' mb='50px' />
-            <Option title='등록 혜택' desc='체계적인 차량 관리를 위한 정보 제공과<br/>정기점검 쿠폰 및 무상 오일 교환' mb='50px' />
+            <Option title='APP 설치 및 등록' desc='신차 구입 후 동봉된 QR코드를 이용하여<br/>APP설치 후 신차 등록' mb='50px'
+              delay='0'
+            />
+            <Option title='등록 혜택' desc='체계적인 차량 관리를 위한 정보 제공과<br/>정기점검 쿠폰 및 무상 오일 교환' mb='50px'
+              delay='100'
+            />
           </style.OptionList>
         )}
-        <style.App>
+        <style.App data-aos="fade-up" data-aos-duration="1800">
           <p>
             편리한 내 차 관리의 시작<br />
             <span>바이크뱅크 멤버쉽 APP</span>
@@ -148,15 +161,16 @@ const Sale = () => {
     </homeStyle.Section>
 
     {/* 03. 차량 서비스 안내 */}
-    < homeStyle.Section padding='210px 0 364.5px 0' ref={el => pageRef.current[2] = el} >
+    < homeStyle.Section padding={isMobile ? '55px 0 92px 0' : '210px 0 364.5px 0'} ref={el => pageRef.current[2] = el} >
       <homeStyle.PageWidth>
         <TitleList
           number="03"
-          bold="차량 서비스 안내"
+          subtitle={isMobile && "차량 서비스 안내"}
+          bold={!isMobile && "차량 서비스 안내"}
           desc1='고객님께 만족스러운 서비스를 제공하겠습니다.'
           nonSubtitle
         />
-        <style.ServiceWrap>
+        <style.ServiceWrap data-aos="fade-up" data-aos-duration="1800">
           {serviceList.map(item => <Service key={item.id} title={item.title} desc={item.desc} />)}
         </style.ServiceWrap>
         <style.Button>판매/서비스점 찾기</style.Button>

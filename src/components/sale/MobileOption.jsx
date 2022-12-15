@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import AOS from 'aos';
 
 const MobileOption = ({ title1, desc1, title2, desc2, color }) => {
+    useEffect(() => {
+        AOS.init({ duration: 1800, })
+    }, [])
     return (
         <>
-            <Wrap color={color}>
+            <Wrap color={color} data-aos="fade-up" data-aos-duration="1800">
                 <div></div>
                 <li>
                     <p className='title'>{title1}</p>
@@ -27,6 +31,7 @@ const Wrap = styled.ul`
     border-radius: 15px;
     margin-right: 30px;
     overflow: hidden;
+    background-color: #fff;
     >div {
         width: 100%;
         height: 20px;
