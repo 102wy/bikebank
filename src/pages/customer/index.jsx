@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Map from '../../components/customer/Map';
+import Question from '../../components/customer/Question';
 import SubTitleSection from '../../components/SubTitleSection';
 import TitleList from '../../components/TitleList';
 import * as homeStyle from '../Home/style';
@@ -42,6 +43,31 @@ const Customer = () => {
             nonSubtitle
           />
           <Map />
+        </homeStyle.PageWidth>
+      </homeStyle.Section>
+
+      {/* 03. 자주 묻는 질문 */}
+      <homeStyle.Section padding='99px 0 253.5px 0'>
+        <homeStyle.PageWidth>
+          <TitleList
+            number="03"
+            bold="자주 묻는 질문"
+            nonSubtitle
+            noDesc
+          />
+          <Question />
+        </homeStyle.PageWidth>
+      </homeStyle.Section>
+
+      {/* 04. 공지사항 */}
+      <homeStyle.Section padding='99px 0 130px 0' background='#f8f8f8'>
+        <homeStyle.PageWidth>
+          <TitleList
+            number="04"
+            bold="공지사항"
+            nonSubtitle
+            noDesc
+          />
         </homeStyle.PageWidth>
       </homeStyle.Section>
     </>
