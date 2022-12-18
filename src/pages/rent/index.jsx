@@ -1,17 +1,18 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import RentOption from '../../components/rent/RentOption';
 import RentService from '../../components/rent/RentService';
+import RscCaseItem from '../../components/rent/RscCaseItem';
 import SubNavigation from '../../components/SubNavigation';
 import SubTitleSection from '../../components/SubTitleSection';
 import TitleList from '../../components/TitleList';
 import { mobileContext } from '../../utils/mobileContext';
-import { rentList01, rentList02, rentList04 } from '../../utils/rent/rentlist'
+import { rentList01, rentList02, rentList04, rscCaseList } from '../../utils/rent/rentlist'
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
+import AOS from 'aos';
 
 const Rent = () => {
   const pageRef = useRef([]);
-
   const subNavList = [
     {
       listname: '이용안내',
@@ -34,18 +35,23 @@ const Rent = () => {
 
   // 모바일 여부
   const { isMobile } = useContext(mobileContext);
-
   // 몇번째 탭을 누르고 있는지 알기위한 상태
   const [currentTab, setCurrentTab] = useState(0);
   const [serviceTab, setServiceTab] = useState(0);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1800,
+    })
+  }, [])
+
   return (
     <>
+      {/* 공통 헤더부분 */}
       <SubTitleSection title="렌트상품" />
       <SubNavigation pageRef={pageRef} navlist={subNavList} />
 
       {/* 01. 렌트이용안내 */}
-
       <homeStyle.Section
         padding={isMobile ? "55px 0 100px 0" : "70px 0 220.5px 0"}
         ref={(el) => (pageRef.current[0] = el)}
@@ -58,11 +64,11 @@ const Rent = () => {
             desc1="*배달업 사업자전용"
             descright
           />
-          {!isMobile && <div className="rentImg">
+          {!isMobile && <div className="rentImg" data-aos="fade-up" data-aos-duration="1800">
             <img src="/images/rent_01.png" alt="렌트 이미지" />
           </div>
           }
-          <style.RentList isMobile={isMobile}>
+          <style.RentList isMobile={isMobile} data-aos="fade-up" data-aos-duration="1800" >
             {rentList01.map((item) => (
               <li key={item.id}>
                 <p className="number">{item.id}</p>
@@ -85,9 +91,7 @@ const Rent = () => {
           </homeStyle.Button>
         </homeStyle.PageWidth>
       </homeStyle.Section>
-
       {/* 02. 상품안내 */}
-
       <homeStyle.Section
         padding={isMobile ? "55px 0 100px 0" : "99px 0 196px 0"}
         ref={(el) => (pageRef.current[1] = el)}
@@ -102,10 +106,10 @@ const Rent = () => {
           />
           {/* 모바일 유무에 따른 화면배치 변경 */}
           {isMobile ? (
-            <RentOption />
+            <RentOption data-aos="fade-up" />
           ) : (
             <>
-              <style.RentOptionList>
+              <style.RentOptionList data-aos="fade-up" data-aos-duration="1800">
                 {rentList02.map((item) => (
                   <li
                     key={item.id}
@@ -116,16 +120,14 @@ const Rent = () => {
                   </li>
                 ))}
               </style.RentOptionList>
-              <style.RnetOptionCont>
+              <style.RnetOptionCont data-aos="fade-up" data-aos-duration="1800">
                 <img src={rentList02[currentTab].imgUrl} alt="렌트이미지" />
               </style.RnetOptionCont>
             </>
           )}
         </homeStyle.PageWidth>
       </homeStyle.Section>
-
       {/* 03. 사고보장 안내 */}
-
       <homeStyle.Section
         padding={isMobile ? "55px 0 0 0" : "99px 0 170px 0"}
         ref={(el) => (pageRef.current[2] = el)}
@@ -140,7 +142,7 @@ const Rent = () => {
           />
           <style.RcsWrap>
             {/* RSC 사고 보장 안내 시작 */}
-            <style.RscCont>
+            <style.RscCont data-aos="fade-up" data-aos-duration="1800" data-aos-delay="0">
               <img src="/images/rcs_img_01.png" alt="RSC 이미지" />
               <div>
                 <p>횡단보도 보행자 충돌 사고</p>
@@ -151,14 +153,14 @@ const Rent = () => {
               </div>
             </style.RscCont>
             <style.RscSection>
-              <style.RscDesc>
+              <style.RscDesc data-aos="fade-up" data-aos-duration="1800" data-aos-delay="150">
                 <p>일반 책임보험 차량 이용시</p>
                 <p className="bold">
                   라이더 부담 금액 <br />총 74,144,696원
                 </p>
                 {isMobile ? <p>&#42;벌금 라이더 부담</p> : <p>&#60;벌금 라이더 부담&#62;</p>}
               </style.RscDesc>
-              <style.RscDesc>
+              <style.RscDesc data-aos="fade-up" data-aos-duration="1800" data-aos-delay="150">
                 <p>바이크뱅크 RCS 차량 이용시</p>
                 <p className="primarybold">
                   양산시 김OO 지점장 부담 금액
@@ -173,23 +175,23 @@ const Rent = () => {
       {/* rsc 보장 범위 시작 */}
       <homeStyle.Section background={isMobile ? "#fff" : "#f8f8f8"} padding={isMobile ? "0 0 150px 0" : "104.5px 0 185.5px 0"}>
         <homeStyle.PageWidth>
-          {isMobile ? <TitleList noneNum subtitle="RCS 보장 범위" desc1='종합보험 대비' desc2='저렴한 비용, 폭 넓은 보장' /> : <TitleList noneNum nonSubtitle noDesc bold="RCS 보장 범위" />}
+          {isMobile ? <TitleList noneNum subtitle="RCS 보장 범위" /> : <TitleList noneNum nonSubtitle noDesc bold="RCS 보장 범위" />}
           {!isMobile && <p className="rscdesc">&lt;남자 30세 이상 유상보험 기준 비교&gt;</p>}
         </homeStyle.PageWidth>
         <homeStyle.Area>
           {/* 모바일 유무에 따른 이미지 & 설명 변경 */}
           {isMobile ? (
             <>
-              <img src="/images/mobile_rent_rcs_02.png" alt="RSC 보장 범위" />
+              <img src="/images/mobile_rent_rcs_02.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
               <p className='rscdesc'>책임보험의 보상범위를 확대하여<br />
                 <span>대인 무한, 대물 2억, 상해보험</span>까지 보장</p>
-              <img src="/images/mobile_rent_rcs_03.png" alt="RSC 보장 범위" />
-              <img src="/images/mobile_rent_rcs_04.png" alt="RSC 보장 범위" />
+              <img src="/images/mobile_rent_rcs_03.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
+              <img src="/images/mobile_rent_rcs_04.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
             </>
           ) : (
             <>
-              <img src="/images/rcs_img_02.png" alt="RSC 보장 범위" />
-              <img src="/images/rcs_img_03.png" alt="RSC 보장 범위" />
+              <img src="/images/rcs_img_02.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
+              <img src="/images/rcs_img_03.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
             </>
           )}
           <homeStyle.Button
@@ -203,14 +205,19 @@ const Rent = () => {
           </homeStyle.Button>
         </homeStyle.Area>
       </homeStyle.Section>
-      <homeStyle.Section padding="126.5px 0 190px 0">
+      <homeStyle.Section padding={isMobile ? "0 0 100px 0" : "126.5px 0 190px 0"}>
         <homeStyle.PageWidth>
-          <TitleList noneNum nonSubtitle noDesc bold="실제 보장사례" />
+          {/* 실제 보장사례 토글 메뉴 */}
+          <TitleList noneNum noDesc subtitle='실제 보장사례' />
+          <style.RscCaseList data-aos="fade-up" data-aos-duration="1800" >
+            {rscCaseList.map(item => (
+              <RscCaseItem item={item} key={item.id} />
+            ))}
+          </style.RscCaseList>
         </homeStyle.PageWidth>
       </homeStyle.Section>
 
       {/* 04. 렌트차 서비스 안내 */}
-
       <homeStyle.Section
         padding={isMobile ? "55px 0 100px 0" : "99px 0 100px 0"}
         background={isMobile && '#f8f8f8'}
@@ -221,8 +228,8 @@ const Rent = () => {
           {isMobile ? (
             <RentService />
           ) : (
-            <>
-              <style.RentOptionList width="50%">
+            <React.Fragment >
+              <style.RentOptionList width="50%" data-aos="fade-up" data-aos-duration="1800" >
                 {rentList04.map((item) => (
                   <li
                     key={item.id}
@@ -233,15 +240,14 @@ const Rent = () => {
                   </li>
                 ))}
               </style.RentOptionList>
-              <style.RnetOptionCont>
+              <style.RnetOptionCont data-aos="fade-up" data-aos-duration="1800" >
                 <img src={rentList04[serviceTab].imgUrl} alt="렌트 서비스 이미지" />
               </style.RnetOptionCont>
-            </>
+            </React.Fragment>
           )}
         </homeStyle.PageWidth>
       </homeStyle.Section>
     </>
   );
 };
-
 export default Rent;

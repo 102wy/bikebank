@@ -69,3 +69,84 @@ export const rentList04 = [
     imgUrl: '/images/rent_service_02.png',
   },
 ];
+
+export const rscCaseList = [
+  {
+    id: 1,
+    title: '횡단보도 보행자 충돌 사고',
+    children: [
+      {
+        id: 10,
+        desc: '2020년 12월 04일 경기도 안산시 단원구 도로에서 라이더가 횡단보도 보행자와 충돌 (적색신호 변경된 시점) 피해자 과실 10%',
+        normalPrice: '라이더 부담 금액 \n총 23,411,700원',
+        RSCprice: '라이더 부담 금액\n0원',
+        isToggle: false,
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: '가로수와 충돌한 사고',
+    children: [
+      {
+        id: 20,
+        desc: '2020년 09월 1일 경기도 부천시 도로에서 역주행하여 주행중 마주오던 차량을 피하려나 가로수와 충돌하여 사망하는 사고',
+        normalPrice: '보상금액\n0원',
+        RSCprice: '라이더 보상 금액\n50,000,000원',
+        isToggle: false,
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: '교차로 신호위반 충돌',
+    children: [
+      {
+        id: 30,
+        desc: '2020년 04월 21일 경기도 부천시 교차로에서 라이더가 신호위반하여 직전하던 차량과 충돌한 사고 (자차 과실 70%)',
+        normalPrice: '라이더 부담 금액\n총 59,204,352원',
+        RSCprice: '라이더 부담 금액\n0원',
+        isToggle: false,
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: '횡단보도 보행자 충돌 사고',
+    children: [
+      {
+        id: 40,
+        desc: '2020년 05월 11일 경기도 의정부시 평화로 소재 도로에서 횡단보도를 보행하던 피해자와 충돌한 사고. (횡단보도 사고) 자차 과실 50%',
+        normalPrice: '라이더 부담 금액\n총 19,183,975원',
+        RSCprice: '라이더 부담 금액\n0원',
+        isToggle: false,
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: '교차로 비접촉 사고',
+    children: [
+      {
+        id: 50,
+        desc: '2020년 08월 30일 서울시 강서구 도로에서 불법 유턴하는 택시를 피하려다 라이더가 넘어지는 비접촉 사고 (자차과실 0%)',
+        normalPrice: '라이더 보상 금액\n총 0원',
+        RSCprice: '라이더 보상 금액\n9,480,000원',
+        isToggle: false,
+      },
+    ],
+  },
+  {
+    id: 6,
+    title: '무단횡단 피해자와 충돌 사고',
+    children: [
+      {
+        id: 60,
+        desc: '2020년 03월 9일 서울시 종로구 이면도로에서 라이더가 무단횡단을 하던 피해자와 충돌한 사고 (자차과실 20%)',
+        normalPrice: '라이더 부담 금액\n총 31,769,040원',
+        RSCprice: '라이더 부담 금액\n0원',
+        isToggle: false,
+      },
+    ],
+  },
+];

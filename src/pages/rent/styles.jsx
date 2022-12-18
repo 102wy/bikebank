@@ -304,4 +304,5 @@ export const RscCaseList = styled.ul`
   display: flex;
   flex-direction: column;
   margin-top: 49.5px;
+  border-bottom: 1px solid #999;
 `;
