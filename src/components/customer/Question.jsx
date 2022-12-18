@@ -1,55 +1,61 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 
-const Question = () => {
+const QuestionItem = ({ item }) => {
 
-    const questionList = [
-        {
-            id: 1,
-            title: '바이크뱅크 렌트 상품은 책임보험인가요?',
-            desc: "바이크뱅크 렌트상품의 보장은 유상운송책임보험 + RCS*(Ride Care System)입니다.\n'대인무한','대물2억원'으로 업계 최고 담보금액을 보장하고 있습니다.(단, 공소권있음)\n* RCS(Ride Care System)란? 고가의 종합보험이 부담되어 책임보험만 가입하여 운행하는 라이더를 위해, 바이크뱅크가 사고보장을 보증하는 라이더 지원 시스템입니다."
-        },
-        {
-            id: 2,
-            title: '프리랜서로 배달대행을 하는 기사입니다. 바이크뱅크 렌트상품을 이용하고 싶습니다.',
-            desc: "바이크뱅크의 렌트상품은 배달업 사업자 전용 상품입니다.\n계약이 체결된 배달대행사의 지점(지사, 대리점, 허브, 총판 등)에서 이용이 가능하며,\n개인 또는 공급계약체결이 어려운 배달대행사에서 바이크뱅크 렌트상품을 이용하시고자 하는 경우에는\n가까운 바이크뱅크 대리점으로 이용문의 바랍니다.\n* 가까운 대리점 찾기보기 -> 홈페이지 내 유통망현황이 있을 경우 해당페이지로 이동 링크"
-        },
-        {
-            id: 3,
-            title: '기사가 퇴사하여 운행하지 않는 바이크뱅크 렌트 차량을 계약 만기전에 반납할 수 있나요?',
-            desc: "*휴차 발생시 - 이관 안내\n기사의 퇴사 등으로 휴차가 발생한 경우, 동일 배달대행사 내에서 휴차의 이관이 가능합니다.\n차량공유서비스 APP의 휴차정보공유 메뉴를 이용하여 휴차정보를 공유할 수 있습니다.\n이관할 곳과 받을 곳 양측의 이관협의가 된 경우\n양측대표자가 자필서명을 포함하여 작성한 이관신청서를 평일 17시까지 담당부서로 이관신청서접수* 하면,\n이관불가사유(미정산, 미계약 등)가 없을 경우 익일부터 이관적용되며, 렌트료는 이관된 지점에 과금됩니다.\n* 휴차 발생시 - 이관 불가시\n- 반납형 렌트상품의 잔여기간이 6개월 미만일 경우 중도반납을 신청할 수 있으나,\n만기전 중도계약해지로 인한 위약금(잔여렌트료의 20 %)납부가 필요하며, 보증금은 반환되지 않습니다.\n그리고, 반납차량의 정비금액은 별도 청구되어집니다.\n- 인수형 렌트상품은 반납이 불가하며, 잔여기간이 6개월미만일 경우 중도인수를 신청할 수 있습니다.\n중도인수 시에는 중도인수대금(잔여렌트료 전액 + 차량별인수금 - 보증금) 의 납부가 필요합니다."
-        },
-        {
-            id: 1,
-            title: '바이크뱅크 렌트 상품은 책임보험인가요?',
-            desc: "바이크뱅크 렌트상품의 보장은 유상운송책임보험 + RCS*(Ride Care System)입니다.\n'대인무한','대물2억원'으로 업계 최고 담보금액을 보장하고 있습니다.(단, 공소권있음)\n* RCS(Ride Care System)란? 고가의 종합보험이 부담되어 책임보험만 가입하여 운행하는 라이더를 위해, 바이크뱅크가 사고보장을 보증하는 라이더 지원 시스템입니다."
-        },
-        {
-            id: 1,
-            title: '바이크뱅크 렌트 상품은 책임보험인가요?',
-            desc: "바이크뱅크 렌트상품의 보장은 유상운송책임보험 + RCS*(Ride Care System)입니다.\n'대인무한','대물2억원'으로 업계 최고 담보금액을 보장하고 있습니다.(단, 공소권있음)\n* RCS(Ride Care System)란? 고가의 종합보험이 부담되어 책임보험만 가입하여 운행하는 라이더를 위해, 바이크뱅크가 사고보장을 보증하는 라이더 지원 시스템입니다."
-        },
-        {
-            id: 1,
-            title: '바이크뱅크 렌트 상품은 책임보험인가요?',
-            desc: "바이크뱅크 렌트상품의 보장은 유상운송책임보험 + RCS*(Ride Care System)입니다.\n'대인무한','대물2억원'으로 업계 최고 담보금액을 보장하고 있습니다.(단, 공소권있음)\n* RCS(Ride Care System)란? 고가의 종합보험이 부담되어 책임보험만 가입하여 운행하는 라이더를 위해, 바이크뱅크가 사고보장을 보증하는 라이더 지원 시스템입니다."
-        },
-        {
-            id: 1,
-            title: '바이크뱅크 렌트 상품은 책임보험인가요?',
-            desc: "바이크뱅크 렌트상품의 보장은 유상운송책임보험 + RCS*(Ride Care System)입니다.\n'대인무한','대물2억원'으로 업계 최고 담보금액을 보장하고 있습니다.(단, 공소권있음)\n* RCS(Ride Care System)란? 고가의 종합보험이 부담되어 책임보험만 가입하여 운행하는 라이더를 위해, 바이크뱅크가 사고보장을 보증하는 라이더 지원 시스템입니다."
-        },
-    ]
+    const [toggle, setToggle] = useState(false);
 
     return (
-        <Wrap>
-            <li></li>
+        <Wrap isToggle={toggle} onClick={() => setToggle((prev) => !prev)}>
+            <Title isToggle={toggle}>
+                {item.title}
+            </Title>
+            <Question isToggle={toggle}>
+                {item.desc}
+            </Question>
         </Wrap>
     );
 };
 
-export default Question;
+export default QuestionItem;
 
-const Wrap = styled.ul`
-    
+const Wrap = styled.li`
+    background-color: ${props => props.isToggle ? '#f8f8f8' : '#fff'}
+`
+
+const Title = styled.p`
+    padding: 20px 56px;
+    color: #5d5d5d;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.45px;
+    border-top: 1px solid #999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &:after {
+        content: '';
+        display: block;
+        background: url('/images/btn_down.png') no-repeat center;
+        width: 19.7px;
+        height: 11.9px;
+        background-size: contain;
+        ${props => props.isToggle && css`
+            background: url('/images/btn_up.png') no-repeat center;
+        `}
+    }
+`
+
+const Question = styled.p`
+    padding: 38px 56px;
+    white-space: pre-wrap;
+    color: #5d5d5d;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.45px;
+    display: none;
+    border-top: 1px solid #999;
+    ${props => props.isToggle && css`
+        display: flex;
+    `}
 `

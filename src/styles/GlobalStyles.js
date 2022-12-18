@@ -12,9 +12,7 @@ const GlobalStyles = createGlobalStyle`
 	font-family: 'sf';
 	font-style: normal;
 	src: url('sf.woff') format('woff');
-    }
-    @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
-
+}
     *{
         margin: 0;
         padding: 0;

@@ -287,31 +287,21 @@ export const RscDesc = styled.div`
       letter-spacing: -0.45px;
       color: ${props => props.theme.gray02};
       text-align: right;
-      }
     }
-    &:first-child:after {
+    }
+  }
+  &:first-child:after {
       content: '';
       width: 100%;
       height: 1px;
       background-color: ${props => props.theme.gray02};
       display: block;
       margin-top: 10px;
-      }
-  }
-  
+    }
 `;
-
-// rsc 실제 보장사례
 
 export const RscCaseList = styled.ul`
   display: flex;
   flex-direction: column;
   margin-top: 49.5px;
-  overflow: hidden;
-  border-bottom: 1px solid #999;
-  @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
-    padding-right: 30px;
-    /* margin-top: 10; */
-  }
 `;
-

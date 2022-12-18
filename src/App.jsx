@@ -5,7 +5,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { mobileContext } from './utils/mobileContext';
 import useWindowDimensions from './hooks/useWindowDimensions';
 import GoTop from './components/common/GoTop';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 function App() {
   const [isMobile, setMobile] = useState();
@@ -48,48 +47,44 @@ function App() {
     }
   }, [scrollPosition]);
 
-  const queryClient = new QueryClient();
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <mobileContext.Provider
-        value={{
-          isMobile,
-          setMobile,
-          navigationShow,
-          setNavigationShow,
-          navigationHide,
-          setNavigationHide,
-          scrollPosition,
-          isMain,
-          setMain,
-          isTop,
-          setIsTop,
-        }}
-      >
-        <Header />
-        {isMobile ? (
-          <div
-            style={
-              isMain || (!isMain && isTop)
-                ? { paddingTop: '50px' }
-                : { paddingTop: '0' }
-            }
-          />
-        ) : (
-          <div
-            style={
-              isMain || (!isMain && isTop)
-                ? { paddingTop: '100px' }
-                : { paddingTop: '0' }
-            }
-          />
-        )}
-        <Outlet />
-        <GoTop />
-        <Footer />
-      </mobileContext.Provider>
-    </QueryClientProvider>
+    <mobileContext.Provider
+      value={{
+        isMobile,
+        setMobile,
+        navigationShow,
+        setNavigationShow,
+        navigationHide,
+        setNavigationHide,
+        scrollPosition,
+        isMain,
+        setMain,
+        isTop,
+        setIsTop,
+      }}
+    >
+      <Header />
+      {isMobile ? (
+        <div
+          style={
+            isMain || (!isMain && isTop)
+              ? { paddingTop: '50px' }
+              : { paddingTop: '0' }
+          }
+        />
+      ) : (
+        <div
+          style={
+            isMain || (!isMain && isTop)
+              ? { paddingTop: '100px' }
+              : { paddingTop: '0' }
+          }
+        />
+      )}
+      <Outlet />
+      <GoTop />
+      <Footer />
+    </mobileContext.Provider>
   );
 }
 

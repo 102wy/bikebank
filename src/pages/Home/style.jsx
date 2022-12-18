@@ -69,14 +69,6 @@ export const PageWidth = styled.div`
     letter-spacing: -0.4px;
     margin: 16px 0 10px 0;
   }
-  .rscSubtitle {
-    font-size:16px;
-    line-height:22px;
-    letter-spacing:-0.64px;
-    color: #272727;
-    margin: 10px 0 30px 0;
-    font-weight:700;
-  }
 `;
 
 export const Title = styled.p`
@@ -101,7 +93,6 @@ export const Button = styled.button`
   font-size: 19px;
   max-width: ${(props) => props.maxWidth || '227.5px'};
   margin-bottom: ${(props) => props.mb || '151px'};
-  margin-top: ${(props) => props.mt || '0'};
   color: ${(props) => props.color || '#000'};
   ${(props) =>
     props.isCenter &&
@@ -110,7 +101,7 @@ export const Button = styled.button`
       padding: 19px 78.5px;
     `}
   @media screen and (max-width: ${(props) => props.theme.breakpoint.mobile}) {
-    margin-bottom: ${props => props.mb || '60px'};
+    margin-bottom: 60px;
     border-radius: 22px;
     padding: ${props => props.padding || '11px 18px'};
     font-size: 14px;

@@ -49,8 +49,8 @@ const Wrap = styled.div`
   @media screen and (max-width: ${(props) => props.theme.breakpoint.mobile}) {
     height: 60px;
     ${(props) =>
-    props.isTop &&
-    css`
+      props.isTop &&
+      css`
         position: fixed;
         top: 50px;
         margin-bottom: 30px;
@@ -60,13 +60,6 @@ const Wrap = styled.div`
 
 const SubNav = styled.ul`
   display: flex;
-  flex-wrap: nowrap;  
-  @media screen and (max-width: ${(props) => props.theme.breakpoint.mobile}) {
-    overflow: scroll;
-    ::-webkit-scrollbar {
-        display: none;
-      }
-  }
 `;
 
 const SubNavList = styled.li`
@@ -95,7 +88,7 @@ const SubNavList = styled.li`
     ) {
       return css`
         &:nth-child(1) {
-          background-color: #ffdd6d;
+          background-color: #ffe182;
         }
         &:nth-child(2) {
           background-color: #fff;
@@ -113,7 +106,7 @@ const SubNavList = styled.li`
           background-color: #fff;
         }
         &:nth-child(2) {
-          background-color: #ffdd6d;
+          background-color: #ffe182;
         }
         &:nth-child(3) {
           background-color: #fff;
@@ -122,28 +115,24 @@ const SubNavList = styled.li`
     } else if (props.list[2].mobileHeight <= props.scrollPosition) {
       return css`
         &:nth-child(1) {
-          background-color: #fff;
+          background-color: white;
         }
         &:nth-child(2) {
-          background-color: #fff;
+          background-color: white;
         }
         &:nth-child(3) {
-          background-color: #ffdd6d;
+          background-color: #ffe182;
         }
       `;
     }
   }}
   @media screen and (max-width: ${(props) => props.theme.breakpoint.mobile}) {
     font-size: 14px;
+    line-height: 26px;
     letter-spacing: -0.56px;
+    color: #272727;
     font-weight: 500;
     border-radius: 22px;
-    white-space:nowrap;
-    width:100%;
-    max-width:107px;
-    max-height: 44px;
-    padding: 0;
-    line-height:44px;
-    text-align:center;
+    padding: 12px 23px;
   }
 `;

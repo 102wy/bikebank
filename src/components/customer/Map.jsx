@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { option } from '../../utils/map'
+import { option } from '../../utils/customer/map'
 
 const Map = () => {
     const { kakao } = window;

@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Button } from '../../pages/Home/style';
-import AOS from 'aos';
 
 const RentService = () => {
-    useEffect(() => {
-        AOS.init({
-            duration: 1800,
-        });
-    }, [])
     return (
         <Wrap>
             <>
                 <p>차량별 소모품 무상교체</p>
-                <div data-aos="fade-up" data-aos-duration="1800">
+                <div>
                     <ServiceList>
                         <li>
                             <img src="/images/circle_01.png" alt="숫자1" />
@@ -56,7 +49,7 @@ const RentService = () => {
             </>
             <>
                 <p className='title'>사고 발생 시 서비스 지원</p>
-                <AccidentServiceList data-aos="fade-up" data-aos-duration="1800">
+                <AccidentServiceList>
                     <li>
                         <img src="/images/mobile_rent_service_01.png" alt="긴급 출동 서비스" />
                         <p>긴급 출동 서비스</p>
@@ -77,7 +70,6 @@ const RentService = () => {
                 <p className='desc'>*잔여 대차 상황에 따라 대차 사용이 제한될 수 있습니다.<br />
                     *사고 수리 및 차량정비 시 지정 관리점을 이용해야 합니다.</p>
             </>
-            <Button mb='0' mt='70px' color='#fff' background='#999' padding='12px 51px'>서비스점 찾기</Button>
         </Wrap>
     );
 };
