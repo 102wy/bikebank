@@ -20,7 +20,10 @@ const QuestionItem = ({ item }) => {
 export default QuestionItem;
 
 const Wrap = styled.li`
-    background-color: ${props => props.isToggle ? '#f8f8f8' : '#fff'}
+    background-color: ${props => props.isToggle ? '#f8f8f8' : '#fff'};
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        margin-right: 30px;
+    }
 `
 
 const Title = styled.p`
@@ -44,6 +47,34 @@ const Title = styled.p`
             background: url('/images/btn_up.png') no-repeat center;
         `}
     }
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        border-top: 1px solid #000;
+        padding: 14px 15px 39px 0;
+        color: #000;
+        font-size: 15px;
+        line-height: 22px;
+        letter-spacing: -0.6px;
+        font-weight: 700;
+        position: relative;
+        &:after {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 15px;
+            content: '';
+            display: block;
+            background: url('/images/mobile_btn_down.png') no-repeat center;
+            width: 7.7px;
+            height: 4.6px;
+            background-size: cover;
+            ${props => props.isToggle && css`
+                background: url('/images/mobile_btn_up.png') no-repeat center;
+                width: 7.7px;
+                height: 4.6px;
+                background-size: cover;
+            `}
+    }
+}
 `
 
 const Question = styled.p`
@@ -58,4 +89,10 @@ const Question = styled.p`
     ${props => props.isToggle && css`
         display: flex;
     `}
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        padding: 17px 20px;
+        font-size: 15px;
+        letter-spacing: -0.6px;
+        line-height: 24px;
+    }
 `

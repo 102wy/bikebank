@@ -1,9 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { option } from '../../utils/customer/map'
+import { mobileContext } from '../../utils/mobileContext';
 
 const Map = () => {
+    const { isMobile } = useContext(mobileContext);
     const { kakao } = window;
 
     // 지도 select box 에서 어느 시/도 를 선택했는지 관리
@@ -179,7 +181,7 @@ const Map = () => {
                     <p>{messages.title}</p>
                     <DescList>
                         <li>
-                            <p><span>주소</span>{messages.address}</p>
+                            <p><span>{!isMobile && '주소'}</span>{messages.address}</p>
                         </li>
                         <li>
                             <p><span>연락처</span>{messages.tel}</p>
@@ -199,6 +201,9 @@ export default Map;
 const Wrap = styled.div`
     width: 100%;
     height: 100%;
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        padding-right: 30px;
+    }
 `
 
 const Form = styled.form`
@@ -215,6 +220,25 @@ const Form = styled.form`
         letter-spacing: -0.5px;
         color: #5d5d5d;
     }
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        display: flex;
+        flex-wrap: wrap;
+        select {
+            width: 48%;
+            max-width: 50%;
+            padding: 12px 19.8px 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 22px;
+            letter-spacing: -0.56px;
+            height: 44px;
+            &:first-child {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    }
 `
 
 const MapWrap = styled.div`
@@ -223,6 +247,11 @@ const MapWrap = styled.div`
     margin-top: 30px;
     #map {
         height: 461px;
+    }
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        #map {
+            height: 357px;
+        }
     }
 `
 
@@ -235,6 +264,15 @@ const Desc = styled.div`
         letter-spacing: -0.6px;
         font-weight: 700;
         width: 50%;
+    }
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        padding: 15px;
+        flex-direction: column;
+        > p {
+            font-size: 16px;
+            line-height: 26px;
+            letter-spacing: -0.6px;
+        }   
     }
 `
 
@@ -255,5 +293,31 @@ const DescList = styled.ul`
                 display: block;
             }
         }
+    }
+    @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+        width: 100%;
+        li {
+            p {
+                font-size: 14px;
+                gap: 0;
+                letter-spacing: -0.6px;
+                line-height: 24px;
+                span {
+                    font-size: 14px;
+                    font-weight: 700;
+                    width: 80px;
+                    letter-spacing: -0.6px;
+                    line-height: 24px;
+                }
+            }
+            &:first-child {
+                p {
+                    span {
+                        display: none;
+                    }
+                    margin-bottom: 20px;
+                }
+            }
+        }   
     }
 `
