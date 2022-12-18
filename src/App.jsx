@@ -1,10 +1,17 @@
-import Header from './components/common/Header';
-import { Outlet, useLocation } from 'react-router-dom';
-import Footer from './components/common/Footer';
 import { useEffect, useMemo, useState } from 'react';
+import { useLocation, Routes, Route } from 'react-router-dom';
 import { mobileContext } from './utils/mobileContext';
+import { ThemeProvider } from 'styled-components';
 import useWindowDimensions from './hooks/useWindowDimensions';
-import GoTop from './components/common/GoTop';
+import Home from './pages/Home';
+import Layout from './components/common/Layout';
+import Company from './pages/company/index';
+import Rent from './pages/rent/index';
+import Sale from './pages/sale/index';
+import Customer from './pages/customer/index';
+import Recruit from './pages/recruit/index';
+import GlobalStyles from './styles/GlobalStyles';
+import Theme from './styles/Theme';
 
 function App() {
   const [isMobile, setMobile] = useState();
@@ -63,27 +70,19 @@ function App() {
         setIsTop,
       }}
     >
-      <Header />
-      {isMobile ? (
-        <div
-          style={
-            isMain || (!isMain && isTop)
-              ? { paddingTop: '50px' }
-              : { paddingTop: '0' }
-          }
-        />
-      ) : (
-        <div
-          style={
-            isMain || (!isMain && isTop)
-              ? { paddingTop: '100px' }
-              : { paddingTop: '0' }
-          }
-        />
-      )}
-      <Outlet />
-      <GoTop />
-      <Footer />
+      <ThemeProvider theme={Theme}>
+        <GlobalStyles />
+        <Routes>
+          <Route path='/' element={<Layout />} >
+            <Route path='/' element={<Home />} />
+            <Route path='/company' element={<Company />} />
+            <Route path='/rent' element={<Rent />} />
+            <Route path='/sale' element={<Sale />} />
+            <Route path='/customer' element={<Customer />} />
+            <Route path='/recruit' element={<Recruit />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
     </mobileContext.Provider>
   );
 }
