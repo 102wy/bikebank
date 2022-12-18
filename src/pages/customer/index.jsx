@@ -2,10 +2,11 @@ import React from 'react';
 import Map from '../../components/customer/Map';
 import SubTitleSection from '../../components/SubTitleSection';
 import TitleList from '../../components/TitleList';
-import * as homeStyle from '../Home/style';
-import * as style from './styles';
 import { questionList } from '../../utils/customer/question'
 import QuestionItem from '../../components/customer/Question';
+import * as homeStyle from '../Home/style';
+import * as style from './styles';
+
 
 const Customer = () => {
   return (
