@@ -102,37 +102,54 @@ const Map = () => {
         const selectedState = document.querySelector('#state');
         // 시/도 select box의 값이 바뀌면 이동한다.
         selectedState.addEventListener('change', (e) => {
-            // select한 값
-            setStateTarget(e.target.value);
-            value = e.target.value;
-            // select한 값을 option 에서 찾아냄
-            const selected = option.filter(item => !e.target.value ? item.state === stateTarget : item.state === e.target.value);
-            // 이동할 위도 경도 위치 생성
-            const moveLatLon = new kakao.maps.LatLng(selected[0]?.lat, selected[0]?.lng);
+            if (e.target.value === '시/도 선택') {
+                const moveLatLon = new kakao.maps.LatLng(36.5865119351443, 128.1867381602581)
 
-            // 지도 중심을 부드럽게 이동시킵니다
-            // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-            map.setLevel(8);
-            map.panTo(moveLatLon);
-            let latlng = map.getCenter();
-            setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
+                // 지도 중심을 부드럽게 이동시킵니다
+                // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+                map.panTo(moveLatLon);
+                map.setLevel(12);
+                let latlng = map.getCenter();
+                setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
+            } else {
+                // 현재 선택한 select 값을 저장한다.
+                setStateTarget(e.target.value);
+                value = e.target.value;
+                // select한 값을 option 에서 찾아냄
+                const selected = option.filter(item => !e.target.value ? item.state === stateTarget : item.state === e.target.value);
+                // 이동할 위도 경도 위치 생성
+                const moveLatLon = new kakao.maps.LatLng(selected[0]?.lat, selected[0]?.lng);
+                // 지도 중심을 부드럽게 이동시킵니다
+                // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+                map.setLevel(8);
+                map.panTo(moveLatLon);
+                let latlng = map.getCenter();
+                setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
+            }
         });
 
         // selected된 시/도를 찾아낸다.
         const selectedCity = document.querySelector('#city');
-
         // 구/군 select box의 값이 바뀌면 이동한다.
         selectedCity.addEventListener('change', (e) => {
-            // select한 값
-            const selected = option.filter(item => !value ? item.state === stateTarget : item.state === value);
-            const selectedCity = selected[0]?.city?.filter(city => city.name === e.target.value);
-            // 이동할 중심좌표
-            const moveLatLon = new kakao.maps.LatLng(selectedCity[0]?.lat, selectedCity[0]?.lng);
-            // 지도를 부드럽게 이동시킨다.
-            map.setLevel(8);
-            map.panTo(moveLatLon);
-            let latlng = map.getCenter();
-            setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
+            if (e.target.value === '구/군 선택') {
+                const selected = option.filter(item => !value ? item.state === stateTarget : item.state === value);
+                const moveLatLon = new kakao.maps.LatLng(selected[0]?.lat, selected[0]?.lng);
+                // 지도를 부드럽게 이동시킨다.
+                map.setLevel(8);
+                map.panTo(moveLatLon);
+            } else {
+                // select한 값
+                const selected = option.filter(item => !value ? item.state === stateTarget : item.state === value);
+                const selectedCity = selected[0]?.city?.filter(city => city.name === e.target.value);
+                // 이동할 중심좌표
+                const moveLatLon = new kakao.maps.LatLng(selectedCity[0]?.lat, selectedCity[0]?.lng);
+                // 지도를 부드럽게 이동시킨다.
+                map.setLevel(8);
+                map.panTo(moveLatLon);
+                let latlng = map.getCenter();
+                setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
+            }
         });
 
         kakao.maps.event.addListener(map, 'dragend', function () {
