@@ -32,7 +32,6 @@ const Rent = () => {
     },
   ];
 
-
   // 모바일 여부
   const { isMobile } = useContext(mobileContext);
   // 몇번째 탭을 누르고 있는지 알기위한 상태

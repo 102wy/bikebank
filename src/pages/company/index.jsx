@@ -45,24 +45,16 @@ const Company = () => {
         ref={(el) => (pageRef.current[0] = el)}
       >
         <PageWidth>
-          {isMobile ? (
-            <TitleList
-              number="01"
-              subtitle="끊임없이 진화하는"
-              bold=" 종합 이륜차 솔루션 기업"
-              bold2="바이크뱅크"
-              isMobile
-              noDesc
-            />
-          ) : (
-            <TitleList
-              number="01"
-              subtitle="바이크뱅크"
-              bold="끊임없이 진화하는 종합 이륜차 솔루션 기업"
-              desc1="바이크뱅크는 빠르게 변화하는 퍼스널 모빌리티 환경에서"
-              desc2="문제점을 발견하여 솔루션을 제안합니다."
-            />
-          )}
+          <TitleList
+            number="01"
+            subtitle={isMobile ? "끊임없이 진화하는" : "바이크뱅크"}
+            bold={isMobile ? "종합 이륜차 솔루션 기업" : "끊임없이 진화하는 종합 이륜차 솔루션 기업"}
+            bold2={isMobile && "바이크뱅크"}
+            desc1={!isMobile && "바이크뱅크는 빠르게 변화하는 퍼스널 모빌리티 환경에서"}
+            desc2={!isMobile && "문제점을 발견하여 솔루션을 제안합니다."}
+            isMobile={isMobile}
+            noDesc={isMobile}
+          />
           <style.CompanyListWrap>
             {companyList01.map((item, index) => (
               <ImgList
@@ -72,7 +64,7 @@ const Company = () => {
                 desc1={item.desc1}
                 desc2={item.desc2}
                 desc3={item.desc3}
-                aosDelay={index * 100}
+                aosDelay={index * 500}
               />
             ))}
           </style.CompanyListWrap>
@@ -165,23 +157,16 @@ const Company = () => {
         ref={(el) => (pageRef.current[1] = el)}
       >
         <PageWidth>
-          {isMobile ? (
-            <TitleList
-              number="02"
-              bold="비즈니스를 변화시키는"
-              bold2="편리한 기술"
-              isMobile
-              noDesc
-            />
-          ) : (
-            <TitleList
-              number="02"
-              subtitle="비즈니스를 변화시키는"
-              bold="편리한 기술"
-              desc1="서면으로 계약하는 불편함은 해소하고"
-              desc2="휴대폰 인증으로 안전하고 편리하게 계약을 진행하세요."
-            />
-          )}
+          <TitleList
+            number="02"
+            subtitle={!isMobile && "비즈니스를 변화시키는"}
+            bold={isMobile ? "비즈니스를 변화시키는" : "편리한 기술"}
+            bold2={isMobile && "편리한 기술"}
+            desc1={!isMobile && "서면으로 계약하는 불편함은 해소하고"}
+            desc2={!isMobile && "휴대폰 인증으로 안전하고 편리하게 계약을 진행하세요."}
+            isMobile={isMobile}
+            noDesc={isMobile}
+          />
           <style.CompanyListWrap>
             {companyList02.map((item, index) => (
               <ImgList
@@ -203,22 +188,13 @@ const Company = () => {
         background="#f8f8f8"
       >
         <PageWidth>
-          {isMobile ? (
-            <TitleList
-              isMobile
-              noneNum
-              bold="차량 신청과 관리"
-              desc1="플레이 스토어에서 APP을 다운받으세요."
-            />
-          ) : (
-            <TitleList
-              noneNum
-              nonSubtitle
-              bold="차량 신청과 관리"
-              desc1="플레이 스토어에서 APP을 다운받으세요."
-              desc2="별도의 절차 없이 어디서나 차량 신청 및 관리가 가능합니다."
-            />
-          )}
+          <TitleList
+            noneNum
+            subtitle={isMobile && "차량 신청과 관리"}
+            bold={!isMobile && "차량 신청과 관리"}
+            desc1={isMobile ? "플레이 스토어에서 APP을 다운받으세요." : "플레이 스토어에서 APP을 다운받으세요."}
+            desc2={!isMobile && "별도의 절차 없이 어디서나 차량 신청 및 관리가 가능합니다."}
+          />
           <style.CompanyListWrap>
             {companyList03.map((item, index) => (
               <ImgList
@@ -232,7 +208,7 @@ const Company = () => {
                 isApp={item.isApp}
                 mobileImg={item.mobileImg}
                 isMobile={isMobile}
-                aosDelay={index * 100}
+                aosDelay={index * 700}
               />
             ))}
           </style.CompanyListWrap>
@@ -320,26 +296,17 @@ const Company = () => {
         </PageWidth>
       </Section>
       <Section
-        padding={isMobile ? '0 0 100px 0' : '116.5px 0 156px 0'}
+        padding={isMobile ? '50px 0 100px 0' : '116.5px 0 156px 0'}
         background="#f8f8f8"
       >
         <PageWidth>
-          {isMobile ? (
-            <TitleList
-              noneNum
-              subtitle="권역별 물류 거점으로"
-              bold="이륜차 인프라 확보"
-              desc1="전국 어디에나 차량의 이동과 관리"
-            />
-          ) : (
-            <TitleList
-              noneNum
-              subtitle="420개 이상의"
-              bold="서비스망으로 확실하게"
-              desc1="권역별로 서비스망을 확보하여 이륜차 운용에 필요한"
-              desc2="소모품 교환과 사고발생 수리를 책임집니다."
-            />
-          )}
+          <TitleList
+            noneNum
+            subtitle={isMobile ? "권역별 물류 거점으로" : "420개 이상의"}
+            bold={isMobile ? "이륜차 인프라 확보" : "서비스망으로 확실하게"}
+            desc1={isMobile ? "전국 어디에나 차량의 이동과 관리" : "권역별로 서비스망을 확보하여 이륜차 운용에 필요한"}
+            desc2={!isMobile && "소모품 교환과 사고발생 수리를 책임집니다."}
+          />
         </PageWidth>
         <Area>
           <img
