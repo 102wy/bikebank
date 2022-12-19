@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import SubTitleSection from '../../components/SubTitleSection';
 import TitleList from '../../components/TitleList';
+import { mobileContext } from '../../utils/mobileContext';
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
 
 const Recruit = () => {
+
+  const { isMobile } = useContext(mobileContext);
+
   return <>
     {/*  공통헤더부분 */}
     <SubTitleSection title="채용안내" />
 
     {/* 더 나은 이륜차 시장을 만듭니다. */}
-    <homeStyle.Section padding='190px 0 178px 0'>
+    <homeStyle.Section padding={isMobile ? '50px 0 105.5px 0' : '190px 0 178px 0'}>
       <homeStyle.PageWidth>
         <TitleList
           bold='더 나은 이륜차 시장을 만듭니다.'
           desc1='바이크뱅크는 배달용 이륜차 시장을 선도하는 기업으로'
-          desc2='고객 만족을 위해 임직원이 함께 노력하며 성장하고 있습니다.'
+          desc2={isMobile ? '고객 만족을 위해 임직원이 함께 노력하며' : '고객 만족을 위해 임직원이 함께 노력하며 성장하고 있습니다.'}
+          desc3={isMobile && '성장하고 있습니다.'}
         />
-        <style.Title margin='157px 0 40px 0'>근무 환경과 복지</style.Title>
+        <style.Title margin={isMobile ? '102px 0 30px 0' : '157px 0 40px 0'}>근무 환경과 복지</style.Title>
         <style.EnvironmentList>
           <li><img src="/images/recruit_02_01.png" alt="근무환경 사진" /></li>
           <li><img src="/images/recruit_02_02.png" alt="근무환경 사진" /></li>
@@ -35,39 +40,82 @@ const Recruit = () => {
       </homeStyle.PageWidth>
     </homeStyle.Section>
 
-    {/*  */}
-    <homeStyle.Section padding='142px 0 180px 0' background='#f5f5f5'>
-      <homeStyle.PageWidth>
-        <style.Title>바이크뱅크의 성장</style.Title>
-      </homeStyle.PageWidth>
-      <homeStyle.Area>
-        <style.GrowthList>
-          <li><img src="/images/growth_01.png" alt="성장 이미지" /></li>
-          <li><img src="/images/growth_02.png" alt="성장 이미지" /></li>
-        </style.GrowthList>
-      </homeStyle.Area>
-      <homeStyle.PageWidth>
-        <style.Title margin='190px 0 22px 0'>입사과정</style.Title>
-        <img src="/images/recruit_process.png" alt="입사과정 이미지" style={{ margin: '0 36px 60px 36px', maxWidth: '100%' }} />
-        <hr />
-        <style.CheckListTitle>체크리스트</style.CheckListTitle>
-        <style.CheckListDesc>
-          - 입사 지원시 본인의 성명, 연락처, 이메일 주소 등을 정확하게 기입하세요.<br />
-          이력서에 기재된 학력 및 경력 사항이 거짓일 경우 합격이 취소될 수 있습니다.<br />
-          - 직무 특성에 따라 사전 과제, 면접, 레퍼런스 체크 등이 추가될 수 있습니다.<br />
-          - 종합적인 결과를 바탕으로 최종 심사를 거쳐 결과를 합격자에게 개별 안내합니다.
-        </style.CheckListDesc>
-        <style.Button onClick={() => window.open(`https://www.saramin.co.kr/zf_user/company-info/view-inner-recruit?csn=THlTNTZRY3VQWHZTL3BrMTQwODhZdz09`)}>채용정보 바로가기</style.Button>
-      </homeStyle.PageWidth>
-    </homeStyle.Section>
+    {/* 바이크뱅크의 성장 */}
+    {isMobile ? (
+      <>
+        <homeStyle.Section padding='45px 0 109px 0' background='#f5f5f5'>
+          <homeStyle.PageWidth>
+            <TitleList
+              subtitle='비즈니스 이륜차 업계 선두주자'
+              desc1='대한민국 이륜차 렌트 점유율 1위'
+              desc2='국내 최대 규모의 서비스 네트워크 보유'
+            />
+            <style.RecruitImg>
+              <img src="/images/recruit_05.png" alt="바이크뱅크의 성장 이미지" />
+            </style.RecruitImg>
+            <TitleList
+              subtitle='매출로 알아보는 성장력'
+              desc1='설립 3년만에 매출액 12배 증가'
+              desc2='시장을 선도하는 성장 속도'
+            />
+            <style.RecruitImg>
+              <img src="/images/recruit_06.png" alt="바이크뱅크의 성장 이미지" />
+            </style.RecruitImg>
+          </homeStyle.PageWidth>
+        </homeStyle.Section>
 
-    {/*  */}
-    <homeStyle.Section padding='200px 0'>
+        {/* 입사과정 */}
+        <homeStyle.Section padding='50px 0 105px 0'>
+          <homeStyle.PageWidth style={{ paddingRight: '30px' }}>
+            <style.RecruitProcess>
+              <p className='title'>입사 과정</p>
+              <p>입사지원 &#62; 서류전형 &#62; 1차 면접 &#62; 2차 면접 &#62; 최종합격</p>
+              <p>체크리스트</p>
+              <p className='desc'>- 입사 지원시 본인의 성명, 연락처, 이메일 주소등을 정확하게 기입하세요.<br />
+                이력서에 기재된 학력 및 경력 사항이 거짓일 경우 합격이 취소될 수 있습니다.<br />
+                - 직무 특성에 따라 사전 과제, 면접, 레퍼런스 체크 등이 추가될 수 있습니다.<br />
+                - 종합적인 결과를 바탕으로 최종 심사를 거쳐 결과를 합격자에게 개별 안내합니다.</p>
+            </style.RecruitProcess>
+            <style.Button>채용정보 바로가기</style.Button>
+          </homeStyle.PageWidth>
+        </homeStyle.Section>
+      </>
+    ) : (
+      <homeStyle.Section padding='142px 0 180px 0' background='#f5f5f5'>
+        <homeStyle.PageWidth>
+          <style.Title>바이크뱅크의 성장</style.Title>
+        </homeStyle.PageWidth>
+        <homeStyle.Area>
+          <style.GrowthList>
+            <li><img src="/images/growth_01.png" alt="성장 이미지" /></li>
+            <li><img src="/images/growth_02.png" alt="성장 이미지" /></li>
+          </style.GrowthList>
+        </homeStyle.Area>
+
+        {/* 입사과정 */}
+        <homeStyle.PageWidth>
+          <style.Title margin='190px 0 22px 0'>입사과정</style.Title>
+          <img src="/images/recruit_process.png" alt="입사과정 이미지" style={{ margin: '0 36px 60px 36px', maxWidth: '100%' }} />
+          <hr />
+          <style.CheckListTitle>체크리스트</style.CheckListTitle>
+          <style.CheckListDesc>
+            - 입사 지원시 본인의 성명, 연락처, 이메일 주소 등을 정확하게 기입하세요.<br />
+            이력서에 기재된 학력 및 경력 사항이 거짓일 경우 합격이 취소될 수 있습니다.<br />
+            - 직무 특성에 따라 사전 과제, 면접, 레퍼런스 체크 등이 추가될 수 있습니다.<br />
+            - 종합적인 결과를 바탕으로 최종 심사를 거쳐 결과를 합격자에게 개별 안내합니다.
+          </style.CheckListDesc>
+          <style.Button onClick={() => window.open(`https://www.saramin.co.kr/zf_user/company-info/view-inner-recruit?csn=THlTNTZRY3VQWHZTL3BrMTQwODhZdz09`)}>채용정보 바로가기</style.Button>
+        </homeStyle.PageWidth>
+      </homeStyle.Section>
+    )}
+
+    {/* 블로그 바로가기 */}
+    <homeStyle.Section padding={isMobile ? '105px 0' : '200px 0'}>
       <homeStyle.PageWidth>
         <style.Blog>
           <p>바이크뱅크의 소식이 궁금하신가요?<br />
             블로그를 통해 살펴보세요.</p>
-          <button>바이크뱅크 블로그<img src="/images/blog_arrow.png" alt="화살표 아이콘" /></button>
+          <button>바이크뱅크 블로그<img src={isMobile ? "/images/mobile_blog_arrow.png" : "/images/blog_arrow.png"} alt="화살표 아이콘" /></button>
         </style.Blog>
       </homeStyle.PageWidth>
     </homeStyle.Section>

@@ -158,8 +158,6 @@ const Map = () => {
             setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
         });
     }, [data]);
-
-    console.log(stateTarget)
     return (
         <Wrap>
             <Form>
