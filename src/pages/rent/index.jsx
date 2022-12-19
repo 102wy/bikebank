@@ -40,9 +40,10 @@ const Rent = () => {
   const [serviceTab, setServiceTab] = useState(0);
 
   useEffect(() => {
-    AOS.init({
-      duration: 1800,
-    })
+    // 스크롤 이벤트를 위한 초기설정
+    AOS.init({ duration: 1800 });
+    // 스크롤 최상단 위치
+    window.scrollTo(0, 0)
   }, [])
 
   return (
@@ -153,14 +154,14 @@ const Rent = () => {
               </div>
             </style.RscCont>
             <style.RscSection>
-              <style.RscDesc data-aos="fade-up" data-aos-duration="1800" data-aos-delay="150">
+              <style.RscDesc data-aos="fade-up" data-aos-duration="1800" data-aos-delay="600">
                 <p>일반 책임보험 차량 이용시</p>
                 <p className="bold">
                   라이더 부담 금액 <br />총 74,144,696원
                 </p>
                 {isMobile ? <p>&#42;벌금 라이더 부담</p> : <p>&#60;벌금 라이더 부담&#62;</p>}
               </style.RscDesc>
-              <style.RscDesc data-aos="fade-up" data-aos-duration="1800" data-aos-delay="150">
+              <style.RscDesc data-aos="fade-up" data-aos-duration="1800" data-aos-delay="1200">
                 <p>바이크뱅크 RCS 차량 이용시</p>
                 <p className="primarybold">
                   양산시 김OO 지점장 부담 금액

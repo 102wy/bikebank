@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import Map from '../../components/customer/Map';
 import Question from '../../components/customer/Question';
 import SubNavigation from '../../components/SubNavigation';
@@ -6,6 +6,7 @@ import SubTitleSection from '../../components/SubTitleSection';
 import TitleList from '../../components/TitleList';
 import { questionList } from '../../utils/customer/question'
 import { mobileContext } from '../../utils/mobileContext';
+import AOS from 'aos';
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
 const Customer = () => {
@@ -30,7 +31,15 @@ const Customer = () => {
     },
   ];
 
+  // 모바일 유무 확인
   const { isMobile } = useContext(mobileContext);
+
+  useEffect(() => {
+    // 페이지 들어왔을때 스크롤 최상단 위치
+    window.scrollTo(0, 0)
+    // 스크롤 이벤트를 위한 설정
+    AOS.init({ duration: 1800 });
+  }, [])
   return (
     <>
       {/* 공통 헤더부분 */}
@@ -50,7 +59,7 @@ const Customer = () => {
             desc1={isMobile ? '고객센터를 통해 궁금증을 해결하세요.' : '고객센터에서는 바이크뱅크와 관련된 문의를 할 수 있습니다.'}
             nonSubtitle={!isMobile}
           />
-          <style.CustomerCenter isMobile={isMobile}>
+          <style.CustomerCenter isMobile={isMobile} data-aos="fade-up" data-aos-duration="1800">
             <div>
               <p>고객센터<br /><span>1522-9008</span></p>
               <button><a href='tel:1522-9008'>
@@ -94,7 +103,7 @@ const Customer = () => {
             nonSubtitle={!isMobile}
             noDesc
           />
-          <style.QuestionList>
+          <style.QuestionList data-aos="fade-up" data-aos-duration="1800">
             {questionList.map(item => (
               <Question key={item.id} item={item} />
             ))}

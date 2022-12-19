@@ -7,9 +7,11 @@ import SubNavigation from '../../components/SubNavigation';
 import SubTitleSection from '../../components/SubTitleSection';
 import TitleList from '../../components/TitleList';
 import { mobileContext } from '../../utils/mobileContext';
+import { serviceList } from '../../utils/sale/salelist';
 import AOS from 'aos'
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
+
 const Sale = () => {
   // 공통 네비게이션 관리부분
   const pageRef = useRef([]);
@@ -27,31 +29,14 @@ const Sale = () => {
       height: pageRef.current[2]?.getBoundingClientRect().height,
     },
   ];
+  // 모바일 유무 확인
   const { isMobile } = useContext(mobileContext);
-  const serviceList = [
-    {
-      id: 1,
-      title: '무상점검',
-      desc: '주행 거리별\n무상 점검 제공'
-    },
-    {
-      id: 2,
-      title: '차량수리',
-      desc: '보증수리/일반수리\n소모품 교환 및 차량 관리'
-    },
-    {
-      id: 3,
-      title: '순정부품',
-      desc: '원할한 정비를 위해\n순정부품 공급 및 재고의 확보'
-    },
-    {
-      id: 4,
-      title: '멤버십 혜택',
-      desc: '전용 앱을 통한 편리한 차량관리\n이벤트 쿠폰 제공 예정'
-    },
-  ]
+
   useEffect(() => {
-    AOS.init({ duration: 1800, })
+    // 스크롤 이벤트를 위한 초기설정
+    AOS.init({ duration: 1800 });
+    // 스크롤 최상단 위치
+    window.scrollTo(0, 0)
   }, [])
 
   return <>
@@ -98,10 +83,10 @@ const Sale = () => {
         ) : (
           <>
             <style.OptionList>
-              <Option title='제품보증기간' desc='신차 구입 후 부품에 따라 1~2년 이내,<br/>또는 주행거리 10,000~20,000km<br/>(선도래 조건)' mb='20px'
+              <Option title='제품보증기간' desc='신차 구입 후 부품에 따라 1~2년 이내,<br/>또는 주행거리 10,000~20,000km<br/>(선도래 조건)' margin='0 0 20px 0'
                 delay='0'
               />
-              <Option title='보증대상부품' desc='모터사이클을 구성하는 모든 부품<br/>(단 소모성 부품 및 유지류는 제외)' mb='20px'
+              <Option title='보증대상부품' desc='모터사이클을 구성하는 모든 부품<br/>(단 소모성 부품 및 유지류는 제외)' margin='0 0 20px 0'
                 delay='100'
               />
             </style.OptionList>
@@ -136,9 +121,11 @@ const Sale = () => {
           <style.OptionList>
             <Option title='APP 설치 및 등록' desc='신차 구입 후 동봉된 QR코드를 이용하여<br/>APP설치 후 신차 등록' mb='50px'
               delay='0'
+              margin='0 0 50px 0'
             />
             <Option title='등록 혜택' desc='체계적인 차량 관리를 위한 정보 제공과<br/>정기점검 쿠폰 및 무상 오일 교환' mb='50px'
               delay='100'
+              margin='0 0 50px 0'
             />
           </style.OptionList>
         )}

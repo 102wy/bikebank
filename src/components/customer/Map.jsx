@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { useQuery, useQueryClient, useMutation } from 'react-query';
+import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import { option } from '../../utils/customer/map'
 import { mobileContext } from '../../utils/mobileContext';
+import AOS from 'aos';
 
 const Map = () => {
+    // 모바일 유무 확인
     const { isMobile } = useContext(mobileContext);
+    // 카카오맵 이용 초기세팅
     const { kakao } = window;
     // 서비스 select box 에서 어떤 서비스를 선택했는지 관리
     const [serviceTarget, setServiceTarget] = useState();
@@ -21,14 +24,15 @@ const Map = () => {
             hour: '9:00 ~ 18:00'
         }
     );
-
     // 지점 API호출
     const { data } = useQuery(['maps', serviceTarget], async () => (
         await axios.get(`${process.env.REACT_APP_API}/v1/repair/shop/?product_type=${serviceTarget === 'bike' ? '3' : '1'}&corp_sido=&corp_gugun`)
             .then(res => res.data.result_data)
     ));
 
+    // 카카오맵 좌표값
     const [center, setCenter] = useState({ La: 128.489103, Ma: 35.840675 })
+    // 카카오맵 지도 레벨
     const [level, setLevel] = useState(3);
 
     // 카카오 맵관련
@@ -158,13 +162,17 @@ const Map = () => {
             setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
         });
     }, [data]);
+
+    useEffect(() => {
+        // 스크롤 이벤트를 위한 설정 
+        AOS.init({ duration: 1800 })
+    }, [])
     return (
-        <Wrap>
+        <Wrap data-aos="fade-up" data-aos-duration="1800">
             <Form>
                 <select name="service" id="service" onChange={(e) => {
                     setServiceTarget(e.target.value)
                 }}>
-                    {/* <select name="service" id="service"> */}
                     <option defaultValue >서비스 선택</option>
                     <option value="rent">렌트 서비스</option>
                     <option value="bike">오토바이 서비스</option>

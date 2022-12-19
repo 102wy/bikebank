@@ -28,13 +28,14 @@ const Company = () => {
     },
   ];
 
-
+  // 모바일 여부
   const { isMobile } = useContext(mobileContext);
   useEffect(() => {
-    AOS.init({
-      duration: 1800,
-    });
-  }, []);
+    // 스크롤 이벤트를 위한 초기설정
+    AOS.init({ duration: 1800 });
+    // 스크롤 최상단 위치
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <SubTitleSection title="회사소개" />

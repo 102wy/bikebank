@@ -10,16 +10,18 @@ import { Navigation, Autoplay } from 'swiper';
 import AOS from 'aos';
 
 const Introduction = () => {
+    // 모바일 유무 확인
     const { isMobile } = useContext(mobileContext);
     useEffect(() => {
-        AOS.init({ duration: 1800, })
+        // 스크롤 이벤트를 위한 초기설정
+        AOS.init({ duration: 1800 })
     }, [])
     return (
         <>
             <BikeList>
                 <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="0"><img src="/images/a_vsx125.png" alt="vsx125 사진" /></li>
-                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="100"><img src="/images/a_vs125.png" alt="vs125 사진" /></li>
-                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="200"><img src="/images/a_vs300.png" alt="vs300 사진" /></li>
+                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="1000"><img src="/images/a_vs125.png" alt="vs125 사진" /></li>
+                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="2000"><img src="/images/a_vs300.png" alt="vs300 사진" /></li>
             </BikeList>
             <Wrap isMobile={isMobile} data-aos={!isMobile && "fade-up"} data-aos-duration="1800">
                 <SwiperWrap loop={true} slidesPerView={1} spaceBetween={92} modules={[Navigation, Autoplay]} autoplay={true} navigation={true}>

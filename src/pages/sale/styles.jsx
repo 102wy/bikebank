@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 export const OptionList = styled.ul`
     display: flex;
     gap: 50px;

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as style from './style';
-import CountUp from 'react-countup';
 import HomeSectionTitle from '../../components/HomeSectionTitle';
 import HomeCheckList from '../../components/HomeCheckList';
 import { mobileContext } from './../../utils/mobileContext';
+import CountUp from 'react-countup';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -13,11 +13,13 @@ import 'swiper/css';
 
 const Home = () => {
   const navigate = useNavigate();
+  // 모바일 유무 확인
   const { isMobile } = useContext(mobileContext);
   useEffect(() => {
-    AOS.init({
-      duration: 1800,
-    });
+    // 스크롤 이벤트를 위한 설정
+    AOS.init({ duration: 1800 });
+    // 스크롤 최상단
+    window.scrollTo(0, 0)
   }, []);
   return (
     <>
@@ -148,17 +150,17 @@ const Home = () => {
               color="#fff"
             />
             <style.CheckPointList>
-              <li data-aos="fade-up" data-aos-delay="0">
+              <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="0">
                 <p>01.</p>
                 <p>보험보장</p>
                 <p>합리적인 가격과 폭 넓은 보장 범위</p>
               </li>
-              <li data-aos="fade-up" data-aos-delay="150">
+              <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="1000">
                 <p>02.</p>
                 <p>관리편의성</p>
                 <p>이륜차에 특화된 관리서비스</p>
               </li>
-              <li data-aos="fade-up" data-aos-delay="300">
+              <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="2000">
                 <p>03.</p>
                 <p>렌트비용</p>
                 <p>합리적인 가격과 폭 넓은 보장 범위</p>
@@ -363,7 +365,7 @@ const Home = () => {
                 <li
                   data-aos="fade-up"
                   data-aos-duration="1800"
-                  data-aos-delay="150"
+                  data-aos-delay="1000"
                 >
                   <p>02.</p>
                   <p>관리편의성</p>
@@ -372,7 +374,7 @@ const Home = () => {
                 <li
                   data-aos="fade-up"
                   data-aos-duration="1800"
-                  data-aos-delay="300"
+                  data-aos-delay="2000"
                 >
                   <p>03.</p>
                   <p>렌트비용</p>
@@ -403,7 +405,7 @@ const Home = () => {
                   <li
                     data-aos="fade-up"
                     data-aos-duration="1800"
-                    data-aos-delay="150"
+                    data-aos-delay="1000"
                   >
                     <p>대물보장</p>
                     <span>2억원</span>
@@ -411,7 +413,7 @@ const Home = () => {
                   <li
                     data-aos="fade-up"
                     data-aos-duration="1800"
-                    data-aos-delay="300"
+                    data-aos-delay="2000"
                   >
                     <p>라이더 추가보장</p>
                     <span>상해보험</span>

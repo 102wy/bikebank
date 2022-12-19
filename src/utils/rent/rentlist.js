@@ -150,3 +150,98 @@ export const rscCaseList = [
     ],
   },
 ];
+
+export const rentOptionList01 = [
+  {
+    imgUrl: '/images/mobile_rent_bike_01.png',
+  },
+  {
+    imgUrl: '/images/mobile_rent_bike_02.png',
+  },
+  {
+    imgUrl: '/images/mobile_rent_bike_03.png',
+  },
+  {
+    imgUrl: '/images/mobile_rent_bike_04.png',
+  },
+  {
+    imgUrl: '/images/mobile_rent_bike_05.png',
+  },
+  {
+    imgUrl: '/images/mobile_rent_bike_06.png',
+  },
+  {
+    imgUrl: '/images/mobile_rent_bike_07.png',
+  },
+  {
+    imgUrl: '/images/mobile_rent_bike_08.png',
+  },
+  {
+    imgUrl: '/images/mobile_rent_bike_09.png',
+  },
+];
+
+export const rentOptionList02 = [
+  {
+    imgUrl: '/images/mobile_rent_kind_01.png',
+    title: '신 차',
+    desc: '신차와 보험상품을 결합한 렌트 상품',
+  },
+  {
+    imgUrl: '/images/mobile_rent_kind_02.png',
+    title: '중고차',
+    desc: '비교적 저렴한 가격의 중고차 렌트 상품',
+  },
+  {
+    imgUrl: '/images/mobile_rent_kind_03.png',
+    title: '만기 후 연장',
+    desc: '1년 계약 종료 후 타던 차량을 연장 계약',
+  },
+  {
+    imgUrl: '/images/mobile_rent_kind_04.png',
+    title: '반납 후 재신청',
+    desc: '1년 계약 종료 차량 반납 후 신차 재신청',
+  },
+];
+
+export const rentOptionList03 = [
+  {
+    imgUrl: '/images/mobile_rent_return_01.png',
+    title: '반납형',
+  },
+  {
+    imgUrl: '/images/mobile_rent_return_02.png',
+    title: '인수형',
+  },
+];
+
+export const rentOptionList04 = [
+  {
+    imgUrl: '/images/mobile_rent_age_01.png',
+    title: '전연령',
+  },
+  {
+    imgUrl: '/images/mobile_rent_age_02.png',
+    title: '만 19세 이상',
+  },
+  {
+    imgUrl: '/images/mobile_rent_age_03.png',
+    title: '만 21세 이상',
+  },
+  {
+    imgUrl: '/images/mobile_rent_age_04.png',
+    title: '만 24세 이상',
+  },
+  {
+    imgUrl: '/images/mobile_rent_age_05.png',
+    title: '만 26세 이상',
+  },
+  {
+    imgUrl: '/images/mobile_rent_age_06.png',
+    title: '만 30세 이상',
+  },
+  {
+    imgUrl: '/images/mobile_rent_age_07.png',
+    title: '만 24세 이상',
+  },
+];
