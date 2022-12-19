@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { QueryClient, useQuery, useQueryClient, useMutation } from 'react-query';
 import styled from 'styled-components';
 import { option } from '../../utils/customer/map'
 import { mobileContext } from '../../utils/mobileContext';
@@ -7,12 +8,11 @@ import { mobileContext } from '../../utils/mobileContext';
 const Map = () => {
     const { isMobile } = useContext(mobileContext);
     const { kakao } = window;
-
+    // 서비스 select box 에서 어떤 서비스를 선택했는지 관리
+    const [serviceTarget, setServiceTarget] = useState();
     // 지도 select box 에서 어느 시/도 를 선택했는지 관리
     const [stateTarget, setStateTarget] = useState();
-
     // API에서 받아온 서비스점 정보
-    const [mapData, setMapData] = useState([]);
     const [messages, setMessages] = useState(
         {
             title: '바이크뱅크 본사',
@@ -23,73 +23,71 @@ const Map = () => {
     );
 
     // 지점 API호출
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API}/v1/repair/shop/?product_type=&corp_sido=&corp_gugun`)
-            .then(res => setMapData(res.data.result_data));
-    }, []);
+    const { data } = useQuery(['maps', serviceTarget], async () => (
+        await axios.get(`${process.env.REACT_APP_API}/v1/repair/shop/?product_type=${serviceTarget === 'bike' ? '3' : '1'}&corp_sido=&corp_gugun`)
+            .then(res => res.data.result_data)
+    ));
 
-    // select option에 따른 API 호출 
-    const handleAPIcall = (e) => {
-        if (e.target.value === 'rent') {
-            axios.get(`${process.env.REACT_APP_API}/v1/repair/shop/?product_type=1&corp_sido=&corp_gugun`)
-                .then(res => setMapData(res.data.result_data));
-        } else if (e.target.value === 'bike') {
-            axios.get(`${process.env.REACT_APP_API}/v1/repair/shop/?product_type=3&corp_sido=&corp_gugun`)
-                .then(res => setMapData(res.data.result_data));
-        }
-    }
+    const [center, setCenter] = useState({ La: 128.489103, Ma: 35.840675 })
+    const [level, setLevel] = useState(3);
 
     // 카카오 맵관련
     useEffect(() => {
+        // 지도 만들기
         const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
         const options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new kakao.maps.LatLng(35.840675, 128.489103), //지도의 중심좌표.
-            level: 3 //지도의 레벨(확대, 축소 정도)
+            center: new kakao.maps.LatLng(center?.Ma, center?.La), //지도의 중심좌표.
+            level: level //지도의 레벨(확대, 축소 정도)
         };
         const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+        console.log(center, level)
 
         // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
         const zoomControl = new kakao.maps.ZoomControl();
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+        kakao.maps.event.addListener(map, 'zoom_changed', function () {
 
-        for (let i = 0; i < mapData.length; i++) {
+            // 지도의 현재 레벨을 얻어옵니다
+            setLevel(map.getLevel())
+        });
+
+        // 지도에 마커 생성
+        for (let i = 0; i < data?.length; i++) {
             // 각각 지점의 타입에 따라 마커 색 변경
             let imageSrc;
 
-            if (mapData[i].deal_type_text === '본사') {
+            if (data[i]?.deal_type_text === '본사') {
                 imageSrc = "/images/icon_marker_bikebank.png"
-            } else if (mapData[i].deal_type_text === '직영점') {
+            } else if (data[i]?.deal_type_text === '직영점') {
                 imageSrc = "/images/icon_marker_yellow.png"
-            } else if (mapData[i].deal_type_text === '대리점') {
+            } else if (data[i]?.deal_type_text === '대리점') {
                 imageSrc = "/images/icon_marker_red.png"
             } else {
                 imageSrc = "/images/icon_marker_blue.png"
             }
 
-            // 마커 이미지의 이미지 크기 입니다
-            const imageSize = new kakao.maps.Size(24, 35);
-            // 마커 이미지를 생성합니다    
-            const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-            // 마커의 위도,경도 
-            const lat = Number(mapData[i].corp_lat);
-            const lng = Number(mapData[i].corp_lon);
-            // 마커 위치를 설정합니다
-            const positions = new kakao.maps.LatLng(lat, lng);
-            const title = mapData[i].bp_full_name;
-            const address = mapData[i].corp_address;
-            const tel = mapData[i].corp_tel;
-            const hour = mapData[i].business_hours;
+            const imageSize = new kakao.maps.Size(24, 35);// 마커 이미지의 이미지 크기
+            const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);// 마커 이미지를 생성
+            const lat = Number(data[i]?.corp_lat);// 마커의 위도
+            const lng = Number(data[i]?.corp_lon);// 마커의 경도
+            const positions = new kakao.maps.LatLng(lat, lng);// 마커의 위치 설정
+            // 누른 지점정보
+            const title = data[i]?.bp_full_name; // 지점명
+            const address = data[i]?.corp_address; // 주소
+            const tel = data[i]?.corp_tel; // 전화번호
+            const hour = data[i]?.business_hours; // 영업시간
 
             // 마커를 생성합니다
             const marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
                 position: positions, // 마커 위치
                 image: markerImage, // 마커 이미지 
-                title: title,
-                ad: address
+                title: title, // 지점명
+                ad: address // 주소
             });
 
-            // 눌렀을때 나타내기
+            // 눌렀을때 정보 나타내기
             kakao.maps.event.addListener(marker, 'click', function (mouseEvent) {
                 setMessages({
                     title,
@@ -128,20 +126,29 @@ const Map = () => {
             // select한 값
             const selected = option.filter(item => item.state === value);
             const selectedCity = selected[0].city.filter(city => city.name === e.target.value);
-
+            // 이동할 중심좌표
             const moveLatLon = new kakao.maps.LatLng(selectedCity[0]?.lat, selectedCity[0]?.lng);
-
-            // 지도 중심을 부드럽게 이동시킵니다
-            // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+            // 지도를 부드럽게 이동시킨다.
             map.setLevel(8);
             map.panTo(moveLatLon);
         });
-    }, [mapData]);
+
+        kakao.maps.event.addListener(map, 'dragend', function () {
+            // 지도 중심좌표를 얻어옵니다 
+            let latlng = map.getCenter();
+            setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
+        });
+    }, [data]);
+
+    console.log(center, level)
 
     return (
         <Wrap>
             <Form>
-                <select name="service" id="service" onChange={(e) => handleAPIcall(e)}>
+                <select name="service" id="service" onChange={(e) => {
+                    setServiceTarget(e.target.value)
+                }}>
+                    {/* <select name="service" id="service"> */}
                     <option defaultValue >서비스 선택</option>
                     <option value="rent">렌트 서비스</option>
                     <option value="bike">오토바이 서비스</option>
