@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SubTitleSection from '../../components/SubTitleSection';
 import * as homestyle from '../Home/style';
 import * as style from './styles'
-import { useParams } from 'react-router-dom';
-import { NoticeList } from '../customer/styles';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Notice = () => {
+    // url의 id값을 가져온다.
     const { id } = useParams();
+    // 눌렀을때 이동을 위한 변수지정
+    const navigate = useNavigate();
 
     const NoticeList = ([
         {
@@ -23,14 +25,19 @@ const Notice = () => {
         },
     ])
 
+    useEffect(() => {
+        // 이동했을때 스크롤 top
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
         <>
             {/* 공통 헤더부분 */}
             <SubTitleSection title="공지사항" background='#d6d6d6' />
 
-
+            {/* 내용 */}
             <homestyle.Section padding='153px 0'>
-                <homestyle.PageWidth>
+                <homestyle.PageWidth gap='0'>
                     <style.Title>{NoticeList[id]?.title}</style.Title>
                     <style.Date>{NoticeList[id]?.date}</style.Date>
                     <style.Desc>
@@ -57,6 +64,7 @@ const Notice = () => {
                             </p>
                         )}
                     </style.Desc>
+                    <style.Button onClick={() => navigate(-1)}>돌아가기</style.Button>
                 </homestyle.PageWidth>
             </homestyle.Section>
         </>
