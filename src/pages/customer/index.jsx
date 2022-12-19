@@ -9,7 +9,10 @@ import { mobileContext } from '../../utils/mobileContext';
 import AOS from 'aos';
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
+import { useNavigate } from 'react-router-dom';
 const Customer = () => {
+  const navigate = useNavigate();
+
   // subNavigation을 위한 ref
   const pageRef = useRef([]);
   const subNavList = [
@@ -125,10 +128,10 @@ const Customer = () => {
             noDesc
           />
           <style.NoticeList>
-            <li>
+            <li onClick={() => navigate(`/notice/1`)}>
               <p>바이크뱅크 서류 양식 자료<span>2022.11.24</span></p>
             </li>
-            <li>
+            <li onClick={() => navigate(`/notice/0`)}>
               <p>바이크뱅크 개인위치정보 이전 안내<span>2022.09.26</span></p>
             </li>
           </style.NoticeList>

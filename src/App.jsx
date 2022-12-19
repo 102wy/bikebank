@@ -12,6 +12,8 @@ import Customer from './pages/customer/index';
 import Recruit from './pages/recruit/index';
 import GlobalStyles from './styles/GlobalStyles';
 import Theme from './styles/Theme';
+import SaleBike from './pages/sale/salebike';
+import Notice from './pages/notice';
 
 function App() {
   const [isMobile, setMobile] = useState();
@@ -78,8 +80,10 @@ function App() {
             <Route path='/company' element={<Company />} />
             <Route path='/rent' element={<Rent />} />
             <Route path='/sale' element={<Sale />} />
+            <Route path='/sale/:id' element={<SaleBike />} />
             <Route path='/customer' element={<Customer />} />
             <Route path='/recruit' element={<Recruit />} />
+            <Route path='/notice/:id' element={<Notice lz />} />
           </Route>
         </Routes>
       </ThemeProvider>
