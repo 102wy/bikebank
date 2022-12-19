@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { QueryClient, useQuery, useQueryClient, useMutation } from 'react-query';
+import { useQuery, useQueryClient, useMutation } from 'react-query';
 import styled from 'styled-components';
 import { option } from '../../utils/customer/map'
 import { mobileContext } from '../../utils/mobileContext';
@@ -40,8 +40,6 @@ const Map = () => {
             level: level //지도의 레벨(확대, 축소 정도)
         };
         const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-        console.log(center, level)
 
         // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
         const zoomControl = new kakao.maps.ZoomControl();
@@ -108,7 +106,7 @@ const Map = () => {
             setStateTarget(e.target.value);
             value = e.target.value;
             // select한 값을 option 에서 찾아냄
-            const selected = option.filter(item => item.state === e.target.value);
+            const selected = option.filter(item => !e.target.value ? item.state === stateTarget : item.state === e.target.value);
             // 이동할 위도 경도 위치 생성
             const moveLatLon = new kakao.maps.LatLng(selected[0]?.lat, selected[0]?.lng);
 
@@ -116,6 +114,8 @@ const Map = () => {
             // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
             map.setLevel(8);
             map.panTo(moveLatLon);
+            let latlng = map.getCenter();
+            setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
         });
 
         // selected된 시/도를 찾아낸다.
@@ -124,13 +124,15 @@ const Map = () => {
         // 구/군 select box의 값이 바뀌면 이동한다.
         selectedCity.addEventListener('change', (e) => {
             // select한 값
-            const selected = option.filter(item => item.state === value);
-            const selectedCity = selected[0].city.filter(city => city.name === e.target.value);
+            const selected = option.filter(item => !value ? item.state === stateTarget : item.state === value);
+            const selectedCity = selected[0]?.city?.filter(city => city.name === e.target.value);
             // 이동할 중심좌표
             const moveLatLon = new kakao.maps.LatLng(selectedCity[0]?.lat, selectedCity[0]?.lng);
             // 지도를 부드럽게 이동시킨다.
             map.setLevel(8);
             map.panTo(moveLatLon);
+            let latlng = map.getCenter();
+            setCenter({ Ma: latlng.getLat(), La: latlng.getLng() })
         });
 
         kakao.maps.event.addListener(map, 'dragend', function () {
@@ -140,8 +142,7 @@ const Map = () => {
         });
     }, [data]);
 
-    console.log(center, level)
-
+    console.log(stateTarget)
     return (
         <Wrap>
             <Form>
