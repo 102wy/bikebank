@@ -64,6 +64,8 @@ const Rent = () => {
             desc1="*배달업 사업자전용"
             descright
           />
+
+          {/* 웹일때만 이미지 보여줌 */}
           {!isMobile && <div className="rentImg" data-aos="fade-up" data-aos-duration="1800">
             <img src="/images/rent_01.png" alt="렌트 이미지" />
           </div>
@@ -91,6 +93,7 @@ const Rent = () => {
           </homeStyle.Button>
         </homeStyle.PageWidth>
       </homeStyle.Section>
+
       {/* 02. 상품안내 */}
       <homeStyle.Section
         padding={isMobile ? "55px 0 100px 0" : "99px 0 196px 0"}
@@ -104,6 +107,7 @@ const Rent = () => {
             bold="옵션에 대해 알려드립니다."
             desc1="*상품 종류 및 보험 연령에 따라 요금이 변경됩니다."
           />
+
           {/* 모바일 유무에 따른 화면배치 변경 */}
           {isMobile ? (
             <RentOption data-aos="fade-up" />
@@ -127,6 +131,7 @@ const Rent = () => {
           )}
         </homeStyle.PageWidth>
       </homeStyle.Section>
+
       {/* 03. 사고보장 안내 */}
       <homeStyle.Section
         padding={isMobile ? "55px 0 0 0" : "99px 0 170px 0"}
@@ -141,6 +146,7 @@ const Rent = () => {
             desc2="크고 작은 배달이륜차 사고를 관리하고 있습니다."
           />
           <style.RcsWrap>
+
             {/* RSC 사고 보장 안내 시작 */}
             <style.RscCont data-aos="fade-up" data-aos-duration="1800" data-aos-delay="0">
               <img src="/images/rcs_img_01.png" alt="RSC 이미지" />
@@ -172,6 +178,7 @@ const Rent = () => {
           </style.RcsWrap>
         </homeStyle.PageWidth>
       </homeStyle.Section>
+
       {/* rsc 보장 범위 시작 */}
       <homeStyle.Section background={isMobile ? "#fff" : "#f8f8f8"} padding={isMobile ? "0 0 150px 0" : "104.5px 0 185.5px 0"}>
         <homeStyle.PageWidth>
@@ -179,8 +186,10 @@ const Rent = () => {
           {!isMobile && <p className="rscdesc">&lt;남자 30세 이상 유상보험 기준 비교&gt;</p>}
         </homeStyle.PageWidth>
         <homeStyle.Area>
+
           {/* 모바일 유무에 따른 이미지 & 설명 변경 */}
           {isMobile ? (
+            // 모바일일때
             <>
               <img src="/images/mobile_rent_rcs_02.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
               <p className='rscdesc'>책임보험의 보상범위를 확대하여<br />
@@ -189,6 +198,7 @@ const Rent = () => {
               <img src="/images/mobile_rent_rcs_04.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
             </>
           ) : (
+            // 웹일때
             <>
               <img src="/images/rcs_img_02.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
               <img src="/images/rcs_img_03.png" alt="RSC 보장 범위" data-aos="fade-up" data-aos-duration="1800" />
@@ -207,6 +217,7 @@ const Rent = () => {
       </homeStyle.Section>
       <homeStyle.Section padding={isMobile ? "0 0 100px 0" : "126.5px 0 190px 0"}>
         <homeStyle.PageWidth>
+
           {/* 실제 보장사례 토글 메뉴 */}
           <TitleList noneNum noDesc subtitle='실제 보장사례' />
           <style.RscCaseList data-aos="fade-up" data-aos-duration="1800" >
