@@ -14,6 +14,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import Theme from './styles/Theme';
 import SaleBike from './pages/sale/salebike';
 import Notice from './pages/notice';
+import RentRSC from './pages/rent/rsc';
 
 function App() {
   const [isMobile, setMobile] = useState();
@@ -79,6 +80,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/company' element={<Company />} />
             <Route path='/rent' element={<Rent />} />
+            <Route path='/rent/insu' element={<RentRSC />} />
             <Route path='/sale' element={<Sale />} />
             <Route path='/sale/:id' element={<SaleBike />} />
             <Route path='/customer' element={<Customer />} />

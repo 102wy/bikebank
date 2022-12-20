@@ -10,8 +10,10 @@ import { rentList01, rentList02, rentList04, rscCaseList } from '../../utils/ren
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
 import AOS from 'aos';
+import { useNavigate } from 'react-router-dom';
 
 const Rent = () => {
+  // 네비게이션바의 위치를 알아내기위한 ref
   const pageRef = useRef([]);
   const subNavList = [
     {
@@ -37,6 +39,8 @@ const Rent = () => {
   // 몇번째 탭을 누르고 있는지 알기위한 상태
   const [currentTab, setCurrentTab] = useState(0);
   const [serviceTab, setServiceTab] = useState(0);
+  // url 이동을 위한 변수
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 스크롤 이벤트를 위한 초기설정
@@ -205,6 +209,7 @@ const Rent = () => {
             </>
           )}
           <homeStyle.Button
+            onClick={() => navigate(`/rent/insu`)}
             background={isMobile ? "#999999" : "#434343"}
             color="#fff"
             maxWidth="250px"
