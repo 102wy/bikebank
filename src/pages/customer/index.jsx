@@ -9,7 +9,7 @@ import { mobileContext } from '../../utils/mobileContext';
 import AOS from 'aos';
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 const Customer = () => {
   const navigate = useNavigate();
 
@@ -37,12 +37,19 @@ const Customer = () => {
   // 모바일 유무 확인
   const { isMobile } = useContext(mobileContext);
 
+  // url 파라미터값 가져오기
+  const { id } = useParams();
+
   useEffect(() => {
-    // 페이지 들어왔을때 스크롤 최상단 위치
-    window.scrollTo(0, 0)
     // 스크롤 이벤트를 위한 설정
     AOS.init({ duration: 1800 });
-  }, [])
+
+    // 경로에 따른 위치설정
+    if (id == 1) return window.scrollTo(0, pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset - 100)
+    if (id == 2) return window.scrollTo(0, pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset - 100)
+    if (id == 3) return window.scrollTo(0, pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset - 100)
+    if (!id) return window.scrollTo(0, 0)
+  }, [id])
   return (
     <>
       {/* 공통 헤더부분 */}
@@ -56,6 +63,7 @@ const Customer = () => {
       >
         <homeStyle.PageWidth>
           <TitleList
+            id='customer'
             number="01"
             subtitle={isMobile && "서비스 문의하기"}
             bold={!isMobile && "서비스 문의하기"}

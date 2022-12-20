@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { mobileContext } from '../../utils/mobileContext';
 
 const Footer = () => {
   const { isMobile } = useContext(mobileContext);
+  const navigate = useNavigate();
   return (
     <FooterStyle>
       <PageWidth>
@@ -58,40 +59,40 @@ const Footer = () => {
                 <li>
                   <Link to="/company">바이크뱅크</Link>
                 </li>
-                <li>바이크뱅크</li>
-                <li>편리한 기술</li>
-                <li>이륜차 인프라</li>
+                <li onClick={() => navigate('/company/1')}>바이크뱅크</li>
+                <li onClick={() => navigate('/company/1')}>편리한 기술</li>
+                <li onClick={() => navigate('/company/1')}>이륜차 인프라</li>
               </ul>
               <ul>
                 <li>
                   <Link to="/rent">렌트소개</Link>
                 </li>
-                <li>이용안내</li>
-                <li>상품안내</li>
-                <li>보장안내</li>
-                <li>서비스 안내</li>
+                <li onClick={() => navigate('/rent/1')}>이용안내</li>
+                <li onClick={() => navigate('/rent/2')}>상품안내</li>
+                <li onClick={() => navigate('/rent/3')}>보장안내</li>
+                <li onClick={() => navigate('/rent/4')}>서비스 안내</li>
               </ul>
               <ul>
                 <li>
                   <Link to="/sale">차량소개</Link>
                 </li>
-                <li>라인업</li>
-                <li>보증정책</li>
-                <li>서비스 안내</li>
+                <li onClick={() => navigate('/sale/1')}>라인업</li>
+                <li onClick={() => navigate('/sale/2')}>보증정책</li>
+                <li onClick={() => navigate('/sale/3')}>서비스 안내</li>
               </ul>
               <ul>
                 <li>
                   <Link to="/customer">고객지원</Link>
                 </li>
-                <li>서비스 문의</li>
-                <li>서비스 네트워크</li>
-                <li>자주 묻는 질문</li>
+                <li onClick={() => navigate('/customer/1')}>서비스 문의</li>
+                <li onClick={() => navigate('/customer/2')}>서비스 네트워크</li>
+                <li onClick={() => navigate('/customer/3')}>자주 묻는 질문</li>
               </ul>
               <ul>
                 <li>
                   <Link to="/recruit">채용</Link>
                 </li>
-                <li>채용안내</li>
+                <li onClick={() => navigate('/recruit')}>채용안내</li>
               </ul>
               <ul>
                 <li>Follow us</li>

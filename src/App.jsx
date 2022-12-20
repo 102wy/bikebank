@@ -17,9 +17,12 @@ import Notice from './pages/notice';
 import RentRSC from './pages/rent/rsc';
 
 function App() {
+  // 모바일 여부 
   const [isMobile, setMobile] = useState();
+  // 모바일 네비게이션 show/hide 여부 
   const [navigationShow, setNavigationShow] = useState(false);
   const [navigationHide, setNavigationHide] = useState();
+  // 현재 사용자의 스크롤 위치 
   const [scrollPosition, setScrollPosition] = useState();
 
   // 사용자의 스크롤 위치 확인
@@ -27,6 +30,7 @@ function App() {
     const position = window.pageYOffset;
     setScrollPosition(position);
   };
+
   useMemo(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
@@ -79,13 +83,17 @@ function App() {
           <Route path='/' element={<Layout />} >
             <Route path='/' element={<Home />} />
             <Route path='/company' element={<Company />} />
+            <Route path='/company/:id' element={<Company />} />
             <Route path='/rent' element={<Rent />} />
+            <Route path='/rent/:id' element={<Rent />} />
             <Route path='/rent/insu' element={<RentRSC />} />
             <Route path='/sale' element={<Sale />} />
-            <Route path='/sale/:id' element={<SaleBike />} />
+            <Route path='/sale/:id' element={<Sale />} />
+            <Route path='/sale/bike/:id' element={<SaleBike />} />
             <Route path='/customer' element={<Customer />} />
+            <Route path='/customer/:id' element={<Customer />} />
             <Route path='/recruit' element={<Recruit />} />
-            <Route path='/notice/:id' element={<Notice lz />} />
+            <Route path='/notice/:id' element={<Notice />} />
           </Route>
         </Routes>
       </ThemeProvider>

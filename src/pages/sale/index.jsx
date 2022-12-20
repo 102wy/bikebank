@@ -11,6 +11,7 @@ import { serviceList } from '../../utils/sale/salelist';
 import AOS from 'aos'
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Sale = () => {
   // 공통 네비게이션 관리부분
@@ -32,12 +33,19 @@ const Sale = () => {
   // 모바일 유무 확인
   const { isMobile } = useContext(mobileContext);
 
+  // url 파라미터값 가져오기
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
     // 스크롤 이벤트를 위한 초기설정
     AOS.init({ duration: 1800 });
-    // 스크롤 최상단 위치
-    window.scrollTo(0, 0)
-  }, [])
+    // 경로에 따른 위치설정
+    if (id == 1) return window.scrollTo(0, pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (id == 2) return window.scrollTo(0, pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (id == 3) return window.scrollTo(0, pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (!id) return window.scrollTo(0, 0)
+  }, [id])
 
   return <>
     {/* 공통 헤더부분 */}
@@ -156,7 +164,7 @@ const Sale = () => {
         <style.ServiceWrap data-aos="fade-up" data-aos-duration="1800">
           {serviceList.map(item => <Service key={item.id} title={item.title} desc={item.desc} />)}
         </style.ServiceWrap>
-        <style.Button>판매/서비스점 찾기</style.Button>
+        <style.Button onClick={() => navigate(`/customer/2`)}>판매/서비스점 찾기</style.Button>
       </homeStyle.PageWidth>
     </ homeStyle.Section>
   </>

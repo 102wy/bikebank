@@ -15,14 +15,18 @@ const Home = () => {
   const navigate = useNavigate();
   // 모바일 유무 확인
   const { isMobile } = useContext(mobileContext);
+
+
   useEffect(() => {
     // 스크롤 이벤트를 위한 설정
     AOS.init({ duration: 1800 });
     // 스크롤 최상단
     window.scrollTo(0, 0)
   }, []);
+
   return (
     <>
+      {/* 메인 스와이퍼 */}
       <Swiper loop={true} slidesPerView={1}>
         <SwiperSlide>
           <style.Visual>
@@ -41,6 +45,7 @@ const Home = () => {
           </style.Visual>
         </SwiperSlide>
       </Swiper>
+
       {/* 모바일 유무에 따라 다르게 보여짐 */}
       {/* 모바일일때 */}
       {isMobile ? (
@@ -75,6 +80,7 @@ const Home = () => {
               </li>
             </style.SolutionUl>
           </style.Section>
+
           <style.Section padding="50px 0 100px 0">
             <HomeSectionTitle
               title="rent"
@@ -124,6 +130,7 @@ const Home = () => {
               </li>
             </style.CountUpList>
           </style.Section>
+
           <style.Section background="#f8f8f8" padding="49.5px 0 100px 0">
             <HomeSectionTitle
               title="partners"
@@ -137,6 +144,7 @@ const Home = () => {
               data-aos="fade-up"
             />
           </style.Section>
+
           <style.Section
             backgroundImg="url('/images/check_bg.jpg')"
             padding="50px 0 67px 0"
@@ -211,6 +219,7 @@ const Home = () => {
               </li>
             </style.RCSList>
           </style.Section>
+
           <style.Section padding="0 0 174px 0">
             <HomeCheckList
               title1="전국 360개 이상의"
@@ -225,6 +234,7 @@ const Home = () => {
               data-aos="fade-up"
             />
           </style.Section>
+
           <style.Section imgPadding="0 30px" padding="0 0 154px 0">
             <HomeCheckList
               title1="배달용 오토바이 필요할 때"
@@ -419,7 +429,7 @@ const Home = () => {
                     <span>상해보험</span>
                   </li>
                 </ul>
-                <style.Button onClick={() => navigate(`/rent`)}>
+                <style.Button onClick={() => navigate(`/rent/3`)}>
                   보험보장 상세내용
                 </style.Button>
               </style.InsuranceList>

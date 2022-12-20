@@ -9,6 +9,8 @@ const Layout = () => {
     // 모바일여부 , 메인화면여부 , 사용자의 스크롤이 가장 꼭대기에 있는지 여부 확인
     const { isMobile, isMain, isTop } = useContext(mobileContext);
 
+    console.log(window.scrollY)
+
     return (
         <>
             <Header />

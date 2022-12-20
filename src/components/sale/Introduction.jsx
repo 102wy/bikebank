@@ -31,21 +31,21 @@ const Introduction = () => {
                         <div className='swipercont'>
                             <p>VSX 125</p>
                             <img src="/images/vsx_125.png" alt="vsx125 사진" />
-                            <Button onClick={() => navigate(`/sale/vsx125`)}>자세히 보기</Button>
+                            <Button onClick={() => navigate(`/sale/bike/vsx125`)}>자세히 보기</Button>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className='swipercont'>
                             <p>VS 125</p>
                             <img src="/images/vs_125.png" alt="vs125 사진" />
-                            <Button onClick={() => navigate(`/sale/vs125`)}>자세히 보기</Button>
+                            <Button onClick={() => navigate(`/sale/bike/vs125`)}>자세히 보기</Button>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className='swipercont'>
                             <p>VS 300</p>
                             <img src="/images/vs_300.png" alt="vs300 사진" />
-                            <Button onClick={() => navigate(`/sale/vs300`)}>자세히 보기</Button>
+                            <Button onClick={() => navigate(`/sale/bike/vs300`)}>자세히 보기</Button>
                         </div>
                     </SwiperSlide>
                 </SwiperWrap>

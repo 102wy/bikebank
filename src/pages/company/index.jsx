@@ -10,9 +10,9 @@ import { companyList01, companyList02, companyList03, mobileCompanyList } from '
 import * as style from './styles';
 
 import AOS from 'aos';
+import { useParams } from 'react-router-dom';
 const Company = () => {
   const pageRef = useRef([]);
-
   const subNavList = [
     {
       listname: '바이크뱅크',
@@ -30,16 +30,27 @@ const Company = () => {
 
   // 모바일 여부
   const { isMobile } = useContext(mobileContext);
+
+  // url 파라미터값 가져오기
+  const { id } = useParams();
+
   useEffect(() => {
     // 스크롤 이벤트를 위한 초기설정
     AOS.init({ duration: 1800 });
-    // 스크롤 최상단 위치
-    window.scrollTo(0, 0)
-  }, [])
+
+    // 경로에 따른 위치설정
+    if (id == 1) return window.scrollTo(0, pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (id == 2) return window.scrollTo(0, pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (id == 3) return window.scrollTo(0, pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (!id) return window.scrollTo(0, 0)
+  }, [id])
   return (
     <>
+      {/* 공통 헤더부분 */}
       <SubTitleSection title="회사소개" />
       <SubNavigation pageRef={pageRef} navlist={subNavList} />
+
+      {/* 01. 끊임없이 진화하는 종합 이륜차 솔루션 기업 */}
       <Section
         padding={isMobile ? '55px 0 99.5px 0' : '70px 0 143px 0'}
         ref={(el) => (pageRef.current[0] = el)}
@@ -70,6 +81,8 @@ const Company = () => {
           </style.CompanyListWrap>
         </PageWidth>
       </Section>
+
+      {/* 01-02 핵심 경쟁력  */}
       <Section
         background={isMobile ? '#fff' : '#f8f8f8'}
         padding={isMobile ? '49px 0 101.5px 0' : '0 0 145.5px 0'}
@@ -114,6 +127,8 @@ const Company = () => {
           </style.CompetitionList>
         </PageWidth>
       </Section>
+
+      {/* 03. 도전과 성과 */}
       <Section
         backgroundImg="url('/images/challenge_bg.png')"
         padding={isMobile ? '50px 0 100.5px 0' : '18px 0 159.5px 0'}
@@ -152,6 +167,8 @@ const Company = () => {
           </style.ChallengeList>
         </PageWidth>
       </Section>
+
+      {/* 02. 비즈니스를 변화시키는 편리한 기술 */}
       <Section
         padding={isMobile ? '55px 0 100px 0' : '219px 0 166px 0'}
         ref={(el) => (pageRef.current[1] = el)}
@@ -183,6 +200,8 @@ const Company = () => {
           </style.CompanyListWrap>
         </PageWidth>
       </Section>
+
+      {/* 02-2. 차량신청과 관리 */}
       <Section
         padding={isMobile ? '50px 0 80.5px 0' : '176.5px 0 156.5px 0'}
         background="#f8f8f8"
@@ -214,6 +233,9 @@ const Company = () => {
           </style.CompanyListWrap>
         </PageWidth>
       </Section>
+
+      {/* 02-3. 차량 공급 시스템 */}
+      {/* 모바일일때 */}
       {isMobile ? (
         <Section padding="52px 0 155px 0">
           <PageWidth>
@@ -235,6 +257,7 @@ const Company = () => {
         </Section>
       ) : (
         <>
+          {/* 웹일때 */}
           <Section padding={isMobile ? '52px 0 100px 0' : '103px 0 189px 0'}>
             <PageWidth>
               <TitleList
@@ -254,12 +277,15 @@ const Company = () => {
           </Section>
         </>
       )}
+
+      {/* 03. 출고부터 수거까지 준비된 이륜차 인프라*/}
       <Section
         padding={isMobile ? '55px 0 150px 0' : '103px 0 215px 0'}
         ref={(el) => (pageRef.current[2] = el)}
       >
         <PageWidth>
           {isMobile ? (
+            // 모바일일때
             <>
               <TitleList
                 number="03"
@@ -282,6 +308,7 @@ const Company = () => {
               </style.CompanyListWrap>
             </>
           ) : (
+            // 웹일때
             <>
               <TitleList
                 number="03"
@@ -295,6 +322,8 @@ const Company = () => {
           )}
         </PageWidth>
       </Section>
+
+      {/* 03-2. 서비스망 */}
       <Section
         padding={isMobile ? '50px 0 100px 0' : '116.5px 0 156px 0'}
         background="#f8f8f8"

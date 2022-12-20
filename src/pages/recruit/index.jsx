@@ -14,6 +14,7 @@ const Recruit = () => {
   // 스크롤 이벤트를 위한 초기설정
   useEffect(() => {
     AOS.init({ duration: 1800 })
+    window.scrollTo(0, 0)
   }, [])
 
   return <>

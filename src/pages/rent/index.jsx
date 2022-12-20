@@ -10,7 +10,7 @@ import { rentList01, rentList02, rentList04, rscCaseList } from '../../utils/ren
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
 import AOS from 'aos';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Rent = () => {
   // 네비게이션바의 위치를 알아내기위한 ref
@@ -34,6 +34,8 @@ const Rent = () => {
     },
   ];
 
+  // url 파라미터값 가져오기
+  const { id } = useParams();
   // 모바일 여부
   const { isMobile } = useContext(mobileContext);
   // 몇번째 탭을 누르고 있는지 알기위한 상태
@@ -42,12 +44,18 @@ const Rent = () => {
   // url 이동을 위한 변수
   const navigate = useNavigate();
 
+
   useEffect(() => {
     // 스크롤 이벤트를 위한 초기설정
     AOS.init({ duration: 1800 });
-    // 스크롤 최상단 위치
-    window.scrollTo(0, 0)
-  }, [])
+
+    // 경로에 따른 위치설정
+    if (id == 1) return window.scrollTo(0, pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (id == 2) return window.scrollTo(0, pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (id == 3) return window.scrollTo(0, pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (id == 4) return window.scrollTo(0, pageRef.current[3]?.getBoundingClientRect().top + window.pageYOffset + 100)
+    if (!id) return window.scrollTo(0, 0)
+  }, [id]);
 
   return (
     <>
@@ -92,6 +100,7 @@ const Rent = () => {
             isCenter={!isMobile}
             padding={isMobile ? '12px 0' : '19px 79px'}
             maxWidth={isMobile && '180px'}
+            onClick={() => navigate('/customer/1')}
           >
             이용문의
           </homeStyle.Button>
