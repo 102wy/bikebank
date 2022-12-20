@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
+
 import SubNavigation from '../../components/SubNavigation';
 import SubTitleSection from '../../components/SubTitleSection';
 import TitleList from '../../components/TitleList';
@@ -11,6 +12,7 @@ import * as style from './styles';
 
 import AOS from 'aos';
 import { useParams } from 'react-router-dom';
+import MetaTag from '../../utils/MetaTag';
 const Company = () => {
   const pageRef = useRef([]);
   const subNavList = [
@@ -46,6 +48,9 @@ const Company = () => {
   }, [id])
   return (
     <>
+      {/* 메타태그 */}
+      <MetaTag title=':: 바이크뱅크 - 회사소개 ::' />
+
       {/* 공통 헤더부분 */}
       <SubTitleSection title="회사소개" />
       <SubNavigation pageRef={pageRef} navlist={subNavList} />
