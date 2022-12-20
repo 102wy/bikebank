@@ -18,15 +18,15 @@ const Sale = () => {
   const subNavList = [
     {
       listname: '라인업',
-      height: pageRef.current[0]?.getBoundingClientRect().height,
+      height: pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '보증정책',
-      height: pageRef.current[1]?.getBoundingClientRect().height,
+      height: pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '서비스 안내',
-      height: pageRef.current[2]?.getBoundingClientRect().height,
+      height: pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
   ];
   // 모바일 유무 확인

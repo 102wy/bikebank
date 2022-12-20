@@ -18,19 +18,19 @@ const Rent = () => {
   const subNavList = [
     {
       listname: '이용안내',
-      height: pageRef.current[0]?.getBoundingClientRect().height,
+      height: pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '상품안내',
-      height: pageRef.current[1]?.getBoundingClientRect().height,
+      height: pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '보장안내',
-      height: pageRef.current[2]?.getBoundingClientRect().height,
+      height: pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '서비스 안내',
-      height: pageRef.current[3]?.getBoundingClientRect().height,
+      height: pageRef.current[3]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
   ];
 

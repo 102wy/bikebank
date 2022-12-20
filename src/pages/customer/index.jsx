@@ -18,19 +18,19 @@ const Customer = () => {
   const subNavList = [
     {
       listname: '문의하기',
-      height: pageRef.current[0]?.getBoundingClientRect().height,
+      height: pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '서비스 네트워크',
-      height: pageRef.current[1]?.getBoundingClientRect().height,
+      height: pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '자주 묻는 질문',
-      height: pageRef.current[2]?.getBoundingClientRect().height,
+      height: pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '공지사항',
-      height: pageRef.current[3]?.getBoundingClientRect().height,
+      height: pageRef.current[3]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
   ];
 

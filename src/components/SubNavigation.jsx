@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { PageWidth } from '../pages/Home/style';
 import { mobileContext } from './../utils/mobileContext';
@@ -17,10 +17,10 @@ const SubNavigation = ({ navlist, pageRef }) => {
               pageRef={pageRef}
               key={index}
               scrollPosition={scrollPosition}
-              height={list.height + scrollPosition}
               onClick={() =>
                 pageRef.current[index].scrollIntoView({ behavior: 'smooth' })
               }
+              isActive={scrollPosition}
             >
               {list.listname}
             </SubNavList>
@@ -49,8 +49,8 @@ const Wrap = styled.div`
   @media screen and (max-width: ${(props) => props.theme.breakpoint.mobile}) {
     height: 60px;
     ${(props) =>
-      props.isTop &&
-      css`
+    props.isTop &&
+    css`
         position: fixed;
         top: 50px;
         margin-bottom: 30px;
@@ -79,14 +79,11 @@ const SubNavList = styled.li`
   &:nth-child(3) {
     background-color: #fff;
   }
-  /* 스크롤 위치에 따른 컬러 변경
-   */
+  /* 스크롤 위치에 따른 컬러 변경 */
   ${(props) => {
-    if (
-      props.scrollPosition < props.list[1].mobileHeight ||
-      props.scrollPosition === 0
-    ) {
-      return css`
+    if (props.list.length === 4) {
+      if (0 <= props.scrollPosition && props.scrollPosition <= props.list[1].height) {
+        return css`
         &:nth-child(1) {
           background-color: #ffe182;
         }
@@ -96,12 +93,12 @@ const SubNavList = styled.li`
         &:nth-child(3) {
           background-color: #fff;
         }
+        &:nth-child(4) {
+          background-color: #fff;
+        }
       `;
-    } else if (
-      props.list[1].mobileHeight <= props.scrollPosition &&
-      props.scrollPosition < props.list[2].mobileHeight
-    ) {
-      return css`
+      } else if (props.list[1].height <= props.scrollPosition && props.scrollPosition < props.list[2].height) {
+        return css`
         &:nth-child(1) {
           background-color: #fff;
         }
@@ -111,9 +108,12 @@ const SubNavList = styled.li`
         &:nth-child(3) {
           background-color: #fff;
         }
+        &:nth-child(4) {
+          background-color: #fff;
+        }
       `;
-    } else if (props.list[2].mobileHeight <= props.scrollPosition) {
-      return css`
+      } else if (props.list[2].height <= props.scrollPosition && props.scrollPosition < props.list[3]?.height) {
+        return css`
         &:nth-child(1) {
           background-color: white;
         }
@@ -123,8 +123,75 @@ const SubNavList = styled.li`
         &:nth-child(3) {
           background-color: #ffe182;
         }
+        &:nth-child(4) {
+          background-color: #fff;
+        }
       `;
+      } else if (props.list[3]?.height <= props.scrollPosition) {
+        return css`
+        &:nth-child(1) {
+          background-color: #fff;
+        }
+        &:nth-child(2) {
+          background-color: #fff;
+        }
+        &:nth-child(3) {
+          background-color: #fff;
+        }
+        &:nth-child(4) {
+          background-color: #ffe182;
+        }
+      `
+      }
+    } else {
+      if (0 <= props.scrollPosition && props.scrollPosition <= props.list[1].height) {
+        return css`
+        &:nth-child(1) {
+          background-color: #ffe182;
+        }
+        &:nth-child(2) {
+          background-color: #fff;
+        }
+        &:nth-child(3) {
+          background-color: #fff;
+        }
+        &:nth-child(4) {
+          background-color: #fff;
+        }
+      `;
+      } else if (props.list[1].height <= props.scrollPosition && props.scrollPosition < props.list[2].height) {
+        return css`
+        &:nth-child(1) {
+          background-color: #fff;
+        }
+        &:nth-child(2) {
+          background-color: #ffe182;
+        }
+        &:nth-child(3) {
+          background-color: #fff;
+        }
+        &:nth-child(4) {
+          background-color: #fff;
+        }
+      `;
+      } else if (props.list[2].height <= props.scrollPosition) {
+        return css`
+        &:nth-child(1) {
+          background-color: white;
+        }
+        &:nth-child(2) {
+          background-color: white;
+        }
+        &:nth-child(3) {
+          background-color: #ffe182;
+        }
+        &:nth-child(4) {
+          background-color: #fff;
+        }
+      `;
+      }
     }
+
   }}
   @media screen and (max-width: ${(props) => props.theme.breakpoint.mobile}) {
     font-size: 14px;

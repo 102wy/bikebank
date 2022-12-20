@@ -16,15 +16,15 @@ const Company = () => {
   const subNavList = [
     {
       listname: '바이크뱅크',
-      height: pageRef.current[0]?.getBoundingClientRect().top,
+      height: pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '편리한 기술',
-      height: pageRef.current[1]?.getBoundingClientRect().top,
+      height: pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
     {
       listname: '이륜차 인프라',
-      height: pageRef.current[2]?.getBoundingClientRect().top,
+      height: pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset - 100,
     },
   ];
 
