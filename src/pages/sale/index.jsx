@@ -55,12 +55,14 @@ const Sale = () => {
         />
       </homeStyle.PageWidth>
     </homeStyle.Section>
+
     {/* 컨텐츠 색이 달라서 따로 섹션 나눔 */}
     <homeStyle.Section padding={isMobile ? '0 0 100px 0' : '0 0 168px 0'} background={!isMobile && '#f8f8f8'}>
       <homeStyle.PageWidth>
         <Introduction />
       </homeStyle.PageWidth>
     </homeStyle.Section>
+
     {/* 02. 보증정책 */}
     <homeStyle.Section padding={isMobile ? '55px 0 100px 0' : '233px 0 103px 0'} ref={el => pageRef.current[1] = el}>
       <homeStyle.PageWidth>
