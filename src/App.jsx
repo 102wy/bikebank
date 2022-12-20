@@ -15,6 +15,7 @@ import Theme from './styles/Theme';
 import SaleBike from './pages/sale/salebike';
 import Notice from './pages/notice';
 import RentRSC from './pages/rent/rsc';
+import Privacy from './pages/privacy';
 
 function App() {
   // 모바일 여부 
@@ -94,6 +95,7 @@ function App() {
             <Route path='/customer/:id' element={<Customer />} />
             <Route path='/recruit' element={<Recruit />} />
             <Route path='/notice/:id' element={<Notice />} />
+            <Route path='/privacy' element={<Privacy />} />
           </Route>
         </Routes>
       </ThemeProvider>

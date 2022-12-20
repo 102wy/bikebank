@@ -116,7 +116,7 @@ const Footer = () => {
               </address>
             </Address>
             <Privacy
-              onClick={() => window.open(`http://www.bikebank.kr/privacy.html`)}
+              onClick={() => window.open(`/privacy`)}
             >
               개인정보처리방침
             </Privacy>

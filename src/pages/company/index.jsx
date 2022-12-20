@@ -52,7 +52,7 @@ const Company = () => {
 
       {/* 01. 끊임없이 진화하는 종합 이륜차 솔루션 기업 */}
       <Section
-        padding={isMobile ? '55px 0 99.5px 0' : '70px 0 143px 0'}
+        padding={isMobile ? '55px 0 99.5px 0' : '100px 0 143px 0'}
         ref={(el) => (pageRef.current[0] = el)}
       >
         <PageWidth>

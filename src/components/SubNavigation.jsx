@@ -40,6 +40,10 @@ const Wrap = styled.div`
   box-shadow: 0 8px 15px 0 rgba(212, 212, 212, 0.16);
   z-index: 9;
   margin-bottom: 29px;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+      display: none;
+    }
   ${(props) =>
     props.isTop &&
     css`
@@ -48,6 +52,7 @@ const Wrap = styled.div`
     `}
   @media screen and (max-width: ${(props) => props.theme.breakpoint.mobile}) {
     height: 60px;
+    overflow: scroll;
     ${(props) =>
     props.isTop &&
     css`
@@ -60,6 +65,10 @@ const Wrap = styled.div`
 
 const SubNav = styled.ul`
   display: flex;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+      display: none;
+    }
 `;
 
 const SubNavList = styled.li`
@@ -201,5 +210,7 @@ const SubNavList = styled.li`
     font-weight: 500;
     border-radius: 22px;
     padding: 12px 23px;
+    border-radius: 22px;
+    white-space: nowrap;
   }
 `;
