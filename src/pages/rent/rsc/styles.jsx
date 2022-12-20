@@ -42,6 +42,9 @@ export const Footer = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+        @media screen and (max-width: ${props => props.theme.breakpoint.mobile}){
+            display: none;
+        }
 `
 
 export const Button = styled.button`
