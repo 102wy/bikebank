@@ -2,20 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import { mobileContext } from './utils/mobileContext';
 import { ThemeProvider } from 'styled-components';
-import useWindowDimensions from './hooks/useWindowDimensions';
-import Home from './pages/Home';
-import Layout from './components/common/Layout';
-import Company from './pages/company/index';
-import Rent from './pages/rent/index';
-import Sale from './pages/sale/index';
-import Customer from './pages/customer/index';
-import Recruit from './pages/recruit/index';
-import GlobalStyles from './styles/GlobalStyles';
-import Theme from './styles/Theme';
-import SaleBike from './pages/sale/salebike';
-import Notice from './pages/notice';
-import RentRSC from './pages/rent/rsc';
-import Privacy from './pages/privacy';
+
+import * as page from './pages'
+import * as component from './components'
+import * as style from './styles';
+import * as hook from './hooks'
 
 function App() {
   // 모바일 여부 
@@ -38,29 +29,32 @@ function App() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  const { width } = useWindowDimensions();
 
+  // 사용자의 화면 너비
+  const { width } = hook.useWindowDimensions();
   // 화면 너비에 따른 모바일 유무 확인
   useEffect(() => {
     width >= 764 ? setMobile(false) : setMobile(true);
   }, [width]);
 
-  // 메인화면인지 유무
+  // 현재 url 파라미터
   const { pathname } = useLocation();
+  // 메인화면인지 유무
   const [isMain, setMain] = useState(pathname === '/' ? true : false);
+
   useEffect(() => {
     pathname === '/' ? setMain(true) : setMain(false);
   }, [pathname]);
 
-  // 사용자의 스크롤이 최상단에 있는지 확인
+  // 사용자의 스크롤이 상단에 있는지 확인
   const [isTop, setIsTop] = useState();
   useEffect(() => {
     if (isMobile) {
-      scrollPosition >= 300 ? setIsTop(true) : setIsTop(false);
+      window.scrollY >= 300 ? setIsTop(true) : setIsTop(false);
     } else {
-      scrollPosition >= 400 ? setIsTop(true) : setIsTop(false);
+      window.scrollY >= 400 ? setIsTop(true) : setIsTop(false);
     }
-  }, [scrollPosition]);
+  }, [window.scrollY]);
 
   return (
     <mobileContext.Provider
@@ -78,24 +72,24 @@ function App() {
         setIsTop,
       }}
     >
-      <ThemeProvider theme={Theme}>
-        <GlobalStyles />
+      <ThemeProvider theme={style.Theme}>
+        <style.GlobalStyles />
         <Routes>
-          <Route path='/' element={<Layout />} >
-            <Route path='/' element={<Home />} />
-            <Route path='/company' element={<Company />} />
-            <Route path='/company/:id' element={<Company />} />
-            <Route path='/rent' element={<Rent />} />
-            <Route path='/rent/:id' element={<Rent />} />
-            <Route path='/rent/insu' element={<RentRSC />} />
-            <Route path='/sale' element={<Sale />} />
-            <Route path='/sale/:id' element={<Sale />} />
-            <Route path='/sale/bike/:id' element={<SaleBike />} />
-            <Route path='/customer' element={<Customer />} />
-            <Route path='/customer/:id' element={<Customer />} />
-            <Route path='/recruit' element={<Recruit />} />
-            <Route path='/notice/:id' element={<Notice />} />
-            <Route path='/privacy' element={<Privacy />} />
+          <Route path='/' element={<component.Layout />} >
+            <Route path='/' element={<page.Home />} />
+            <Route path='/company' element={<page.Company />} />
+            <Route path='/company/:id' element={<page.Company />} />
+            <Route path='/rent' element={<page.Rent />} />
+            <Route path='/rent/:id' element={<page.Rent />} />
+            <Route path='/rent/insu' element={<page.RentRSC />} />
+            <Route path='/sale' element={<page.Sale />} />
+            <Route path='/sale/:id' element={<page.Sale />} />
+            <Route path='/sale/bike/:id' element={<page.SaleBike />} />
+            <Route path='/customer' element={<page.Customer />} />
+            <Route path='/customer/:id' element={<page.Customer />} />
+            <Route path='/recruit' element={<page.Recruit />} />
+            <Route path='/notice/:id' element={<page.Notice />} />
+            <Route path='/privacy' element={<page.Privacy />} />
           </Route>
         </Routes>
       </ThemeProvider>

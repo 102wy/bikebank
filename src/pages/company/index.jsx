@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import * as component from '../../components'
 import * as utils from '../../utils';
-import * as homestyle from '../Home/style';
+import * as homestyle from '../home/styles';
 import * as style from './styles';
 
 import AOS from 'aos';

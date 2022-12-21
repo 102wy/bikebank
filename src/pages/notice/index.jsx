@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import SubTitleSection from '../../components/common/SubTitleSection';
-import * as homestyle from '../Home/style';
+import * as homestyle from '../home/styles';
 import * as style from './styles'
 import { useParams, useNavigate } from 'react-router-dom';
 

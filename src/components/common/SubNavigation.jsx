@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { PageWidth } from '../../pages/Home/style';
+import { PageWidth } from '../../pages/home/styles';
 import { mobileContext } from '../../utils/mobileContext';
 
 const SubNavigation = ({ navlist, pageRef }) => {
@@ -45,6 +45,7 @@ const Wrap = styled.div`
       display: none;
     }
   ${(props) =>
+
     props.isTop &&
     css`
       position: fixed;

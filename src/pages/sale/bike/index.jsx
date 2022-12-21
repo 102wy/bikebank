@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import * as homestyle from '../../Home/style';
+import * as homestyle from '../../home/styles';
 import * as style from './styles';
 import * as utils from '../../../utils';
 import * as component from '../../../components'

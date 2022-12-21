@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import * as homeStyle from '../Home/style';
+import * as homeStyle from '../home/styles';
 import * as style from './styles';
 import * as utils from '../../utils';
 import * as component from '../../components'

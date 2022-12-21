@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import SubTitleSection from '../../../components/common/SubTitleSection';
-import * as homestyle from '../../Home/style';
+import * as homestyle from '../../home/styles';
 import * as style from './styles'
 import RentInsuList from '../../../components/rent/RentInsuList';
 import { rentInsuList } from '../../../utils/rent/rentlist'

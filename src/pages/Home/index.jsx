@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as style from './style';
-import HomeSectionTitle from '../../components/home/HomeSectionTitle';
-import HomeCheckList from '../../components/home/HomeCheckList';
-import { mobileContext } from './../../utils/mobileContext';
+
+import * as style from './styles';
+import * as component from '../../components'
+import * as utils from '../../utils';
+
 import CountUp from 'react-countup';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -14,8 +15,7 @@ import 'swiper/css';
 const Home = () => {
   const navigate = useNavigate();
   // 모바일 유무 확인
-  const { isMobile } = useContext(mobileContext);
-
+  const { isMobile } = useContext(utils.mobileContext);
 
   useEffect(() => {
     // 스크롤 이벤트를 위한 설정
@@ -26,6 +26,8 @@ const Home = () => {
 
   return (
     <>
+      {/* 메타태그 */}
+      <component.MetaTag title='(주)바이크뱅크에 오신것을 환영합니다.' keywords='이륜차, 오토바이, 오토바이렌트, 오토바이리스, 배달오토바이, 배달대행렌트, 배달대행오토바이, 라이더' description='비즈니스 이륜차 솔루션 바이크뱅크의 공식 홈페이지입니다' author=', 바이크뱅크' subject='바이크뱅크 홈페이지' copyright='Copyrights 2020 BIKE BANK' url='http://www.bikebank.kr' imgsrc='/images/snail' />
       {/* 메인 스와이퍼 */}
       <Swiper loop={true} slidesPerView={1}>
         <SwiperSlide>
@@ -51,7 +53,7 @@ const Home = () => {
       {isMobile ? (
         <>
           <style.Section borderBt padding="100px 0">
-            <HomeSectionTitle
+            <component.HomeSectionTitle
               title="solution"
               subtitle="기술과 인프라로"
               bold="이륜차 솔루션을 제공합니다."
@@ -82,7 +84,7 @@ const Home = () => {
           </style.Section>
 
           <style.Section padding="50px 0 100px 0">
-            <HomeSectionTitle
+            <component.HomeSectionTitle
               title="rent"
               subtitle="국내 이륜차 렌트 점유율 1위"
               bold="최고의 상품을 공급합니다."
@@ -132,7 +134,7 @@ const Home = () => {
           </style.Section>
 
           <style.Section background="#f8f8f8" padding="49.5px 0 100px 0">
-            <HomeSectionTitle
+            <component.HomeSectionTitle
               title="partners"
               subtitle="비즈니스 파트너들에게"
               bold="이륜차 솔루션을 제공합니다."
@@ -149,7 +151,7 @@ const Home = () => {
             backgroundImg="url('/images/check_bg.jpg')"
             padding="50px 0 67px 0"
           >
-            <HomeSectionTitle
+            <component.HomeSectionTitle
               title="check point"
               subtitle="배달용 렌트의 기준"
               bold="세 가지를 꼭 체크하세요"
@@ -176,7 +178,7 @@ const Home = () => {
             </style.CheckPointList>
           </style.Section>
           <style.Section padding="164px 0">
-            <HomeCheckList
+            <component.HomeCheckList
               title1="배달용 이륜차 선택할 때"
               title2="핵심은 보장 범위"
               number="01"
@@ -221,7 +223,7 @@ const Home = () => {
           </style.Section>
 
           <style.Section padding="0 0 174px 0">
-            <HomeCheckList
+            <component.HomeCheckList
               title1="전국 360개 이상의"
               title2="서비스망으로 확실하게"
               desc1="이륜차 소모품 교환과 사고 수리."
@@ -236,7 +238,7 @@ const Home = () => {
           </style.Section>
 
           <style.Section imgPadding="0 30px" padding="0 0 154px 0">
-            <HomeCheckList
+            <component.HomeCheckList
               title1="배달용 오토바이 필요할 때"
               title2="비용 부담을 줄이도록"
               number="03"
@@ -255,7 +257,7 @@ const Home = () => {
         <>
           <style.Section borderBt padding="163px 0">
             <style.PageWidth isMain>
-              <HomeSectionTitle
+              <component.HomeSectionTitle
                 title="solution"
                 subtitle="기술과 인프라를 바탕으로 제공하는"
                 bold="이륜차 솔루션을 이용해보세요"
@@ -281,7 +283,7 @@ const Home = () => {
           </style.Section>
           <style.Section padding="140px 0 141px 0">
             <style.PageWidth imgMargin="50.5px 0 20px 0" isMain>
-              <HomeSectionTitle
+              <component.HomeSectionTitle
                 title="rent"
                 subtitle="국내 이륜차 렌트 점유율 1위 업체로서"
                 bold="최고 수준의 배달용 렌트 상품을 공급합니다"
@@ -332,9 +334,10 @@ const Home = () => {
               </style.CountUpList>
             </style.PageWidth>
           </style.Section>
+
           <style.Section background="#f8f8f8" padding="130.5px 0 131px 0">
             <style.PageWidth imgMargin="50px 0 0 0" isMain>
-              <HomeSectionTitle
+              <component.HomeSectionTitle
                 title="partners"
                 subtitle="바이크뱅크는 다양한 비즈니스 파트너들에게"
                 bold="이륜차 솔루션을 제공합니다"
@@ -353,7 +356,7 @@ const Home = () => {
             backgroundImg="url('/images/check_bg.jpg')"
           >
             <style.PageWidth gap="238.5px" isMain>
-              <HomeSectionTitle
+              <component.HomeSectionTitle
                 width="0%"
                 title="check point"
                 subtitle="배달용 렌트의 기준"
@@ -395,7 +398,7 @@ const Home = () => {
           </style.Section>
           <style.Section padding="165.5px 0 237.2px 0">
             <style.PageWidth isMain>
-              <HomeCheckList
+              <component.HomeCheckList
                 title1="배달용 이륜차 선택할 때"
                 title2="핵심은 보장 범위"
                 number="01"
@@ -458,7 +461,7 @@ const Home = () => {
           </style.Section>
           <style.Section padding="118.5px 0 124px 0" background="#f8f8f8">
             <style.PageWidth isMain>
-              <HomeCheckList
+              <component.HomeCheckList
                 title1="전국 420개 이상의"
                 title2="서비스망으로 확실하게"
                 number="02"
@@ -476,7 +479,7 @@ const Home = () => {
           </style.Section>
           <style.Section padding="168px 0 251.5px 0">
             <style.PageWidth isMain>
-              <HomeCheckList
+              <component.HomeCheckList
                 title1="배달용 오토바이 필요할 때"
                 title2="비용 부담을 줄이도록"
                 number="03"

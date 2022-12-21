@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { css, keyframes } from 'styled-components';
 import { mobileContext } from './../../utils/mobileContext';
@@ -10,10 +10,13 @@ const MNavigation = () => {
     navigationHide,
     setNavigationHide,
   } = useContext(mobileContext);
+
+  // 네비게이션 숨기기
   const HandleHide = () => {
     setNavigationShow(false);
     setNavigationHide(true);
   };
+
   const navigate = useNavigate();
   return (
     <NavSection navigationShow={navigationShow} navigationHide={navigationHide}>

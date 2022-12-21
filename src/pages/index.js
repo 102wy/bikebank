@@ -1,0 +1,10 @@
+export { default as Home } from './home';
+export { default as Company } from './company';
+export { default as Customer } from './customer';
+export { default as Notice } from './notice';
+export { default as Privacy } from './privacy';
+export { default as Recruit } from './recruit';
+export { default as Rent } from './rent';
+export { default as RentRSC } from './rent/rsc';
+export { default as Sale } from './sale';
+export { default as SaleBike } from './sale/bike';
