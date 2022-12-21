@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Desc } from './HomeSectionTitle';
+import { Desc } from '../home/HomeSectionTitle';
 
 const TitleList = ({
   number,

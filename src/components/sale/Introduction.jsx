@@ -22,30 +22,30 @@ const Introduction = () => {
         <>
             <BikeList>
                 <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="0"><img src="/images/a_vsx125.png" alt="vsx125 사진" /></li>
-                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="1000"><img src="/images/a_vs125.png" alt="vs125 사진" /></li>
-                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="2000"><img src="/images/a_vs300.png" alt="vs300 사진" /></li>
+                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="600"><img src="/images/a_vs125.png" alt="vs125 사진" /></li>
+                <li data-aos="fade-up" data-aos-duration="1800" data-aos-delay="1200"><img src="/images/a_vs300.png" alt="vs300 사진" /></li>
             </BikeList>
-            <Wrap isMobile={isMobile} data-aos={!isMobile && "fade-up"} data-aos-duration="1800">
+            <Wrap isMobile={isMobile} data-aos={!isMobile && "fade-up"} data-aos-duration="1800" data-aos-delay="1800">
                 <SwiperWrap loop={true} slidesPerView={1} spaceBetween={92} modules={[Navigation, Autoplay]} autoplay={true} navigation={true}>
                     <SwiperSlide>
                         <div className='swipercont'>
                             <p>VSX 125</p>
                             <img src="/images/vsx_125.png" alt="vsx125 사진" />
-                            <Button onClick={() => navigate(`/sale/bike/vsx125`)}>자세히 보기</Button>
+                            <Button onClick={() => navigate(`/sale/bike/VSX125`)}>자세히 보기</Button>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className='swipercont'>
                             <p>VS 125</p>
                             <img src="/images/vs_125.png" alt="vs125 사진" />
-                            <Button onClick={() => navigate(`/sale/bike/vs125`)}>자세히 보기</Button>
+                            <Button onClick={() => navigate(`/sale/bike/VS125`)}>자세히 보기</Button>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className='swipercont'>
                             <p>VS 300</p>
                             <img src="/images/vs_300.png" alt="vs300 사진" />
-                            <Button onClick={() => navigate(`/sale/bike/vs300`)}>자세히 보기</Button>
+                            <Button onClick={() => navigate(`/sale/bike/VS300`)}>자세히 보기</Button>
                         </div>
                     </SwiperSlide>
                 </SwiperWrap>

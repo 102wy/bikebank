@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { PageWidth } from '../pages/Home/style';
-import { mobileContext } from './../utils/mobileContext';
+import { PageWidth } from '../../pages/Home/style';
+import { mobileContext } from '../../utils/mobileContext';
 
 const SubNavigation = ({ navlist, pageRef }) => {
   const { isTop, scrollPosition, isMobile } = useContext(mobileContext);

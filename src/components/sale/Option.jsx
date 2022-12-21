@@ -4,7 +4,7 @@ const Service = ({ title, desc, margin, minHeight }) => {
     return (
         <ServiceList margin={margin} minHeight={minHeight}>
             <p className='title'>{title}</p>
-            <p>{desc.split(`<br/>`).map(desc => <>{desc}<br /></>)}</p>
+            <p>{desc.split(`<br/>`).map((desc, index) => <React.Fragment key={index}>{desc}<br /></React.Fragment>)}</p>
         </ServiceList>
     );
 };

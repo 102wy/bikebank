@@ -1,15 +1,13 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import Map from '../../components/customer/Map';
-import Question from '../../components/customer/Question';
-import SubNavigation from '../../components/SubNavigation';
-import SubTitleSection from '../../components/SubTitleSection';
-import TitleList from '../../components/TitleList';
-import { questionList } from '../../utils/customer/question'
-import { mobileContext } from '../../utils/mobileContext';
-import AOS from 'aos';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
-import { useNavigate, useParams } from 'react-router-dom';
+import * as utils from '../../utils';
+import * as component from '../../components'
+
+import AOS from 'aos';
+
 const Customer = () => {
   const navigate = useNavigate();
 
@@ -35,7 +33,7 @@ const Customer = () => {
   ];
 
   // 모바일 유무 확인
-  const { isMobile } = useContext(mobileContext);
+  const { isMobile } = useContext(utils.mobileContext);
 
   // url 파라미터값 가져오기
   const { id } = useParams();
@@ -52,9 +50,12 @@ const Customer = () => {
   }, [id])
   return (
     <>
+      {/* 메타태그 */}
+      <component.MetaTag title=':: 바이크뱅크 - 고객지원 ::' keywords='바이크뱅크 고객지원' description='바이크뱅크 고객지원' author=', 바이크뱅크' subject='바이크뱅크 고객지원' copyright='Copyrights 2020 BIKE BANK' url='http://www.bikebank.kr/customer' imgsrc='/images/snail' />
+
       {/* 공통 헤더부분 */}
-      <SubTitleSection title="고객지원" />
-      <SubNavigation pageRef={pageRef} navlist={subNavList} />
+      <component.SubTitleSection title="고객지원" />
+      <component.SubNavigation pageRef={pageRef} navlist={subNavList} />
 
       {/* 01. 서비스 문의하기 */}
       <homeStyle.Section
@@ -62,7 +63,7 @@ const Customer = () => {
         ref={(el) => (pageRef.current[0] = el)}
       >
         <homeStyle.PageWidth>
-          <TitleList
+          <component.TitleList
             id='customer'
             number="01"
             subtitle={isMobile && "서비스 문의하기"}
@@ -88,7 +89,7 @@ const Customer = () => {
         ref={(el) => (pageRef.current[1] = el)}
       >
         <homeStyle.PageWidth>
-          <TitleList
+          <component.TitleList
             number="02"
             subtitle={isMobile && "서비스 네트워크"}
             bold={!isMobile && "서비스 네트워크"}
@@ -97,7 +98,7 @@ const Customer = () => {
             desc3={isMobile && '부품구입을 할 수 있습니다.'}
             nonSubtitle={!isMobile}
           />
-          <Map />
+          <component.Map />
         </homeStyle.PageWidth>
       </homeStyle.Section>
 
@@ -107,7 +108,7 @@ const Customer = () => {
         ref={(el) => (pageRef.current[2] = el)}
       >
         <homeStyle.PageWidth>
-          <TitleList
+          <component.TitleList
             number="03"
             subtitle={isMobile && "자주 묻는 질문"}
             bold={!isMobile && "자주 묻는 질문"}
@@ -115,8 +116,8 @@ const Customer = () => {
             noDesc
           />
           <style.QuestionList data-aos="fade-up" data-aos-duration="1800">
-            {questionList.map(item => (
-              <Question key={item.id} item={item} />
+            {utils.questionList.map(item => (
+              <component.Question key={item.id} item={item} />
             ))}
           </style.QuestionList>
         </homeStyle.PageWidth>
@@ -128,7 +129,7 @@ const Customer = () => {
         ref={(el) => (pageRef.current[3] = el)}
       >
         <homeStyle.PageWidth>
-          <TitleList
+          <component.TitleList
             number="04"
             subtitle={isMobile && "공지사항"}
             bold={!isMobile && "공지사항"}

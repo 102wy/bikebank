@@ -1,15 +1,16 @@
 import React, { useContext, useEffect } from 'react';
-import SubTitleSection from '../../components/SubTitleSection';
-import TitleList from '../../components/TitleList';
-import { mobileContext } from '../../utils/mobileContext';
-import AOS from 'aos';
+
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
+import * as utils from '../../utils';
+import * as component from '../../components'
+
+import AOS from 'aos';
 
 const Recruit = () => {
 
   // 모바일 여부
-  const { isMobile } = useContext(mobileContext);
+  const { isMobile } = useContext(utils.mobileContext);
 
   // 스크롤 이벤트를 위한 초기설정
   useEffect(() => {
@@ -18,13 +19,16 @@ const Recruit = () => {
   }, [])
 
   return <>
+    {/* 메타태그 */}
+    <component.MetaTag title=':: 바이크뱅크 - 채용안내 ::' keywords='바이크뱅크 채용안내' description='바이크뱅크 채용안내' author=', 바이크뱅크' subject='바이크뱅크 채용안내' copyright='Copyrights 2020 BIKE BANK' url='http://www.bikebank.kr/recruit' imgsrc='/images/snail' />
+
     {/*  공통헤더부분 */}
-    <SubTitleSection title="채용안내" />
+    <component.SubTitleSection title="채용안내" />
 
     {/* 더 나은 이륜차 시장을 만듭니다. */}
     <homeStyle.Section padding={isMobile ? '50px 0 105.5px 0' : '190px 0 178px 0'}>
       <homeStyle.PageWidth>
-        <TitleList
+        <component.TitleList
           bold='더 나은 이륜차 시장을 만듭니다.'
           desc1='바이크뱅크는 배달용 이륜차 시장을 선도하는 기업으로'
           desc2={isMobile ? '고객 만족을 위해 임직원이 함께 노력하며' : '고객 만족을 위해 임직원이 함께 노력하며 성장하고 있습니다. '}
@@ -54,7 +58,7 @@ const Recruit = () => {
       <>
         <homeStyle.Section padding='45px 0 109px 0' background='#f5f5f5'>
           <homeStyle.PageWidth>
-            <TitleList
+            <component.TitleList
               subtitle='비즈니스 이륜차 업계 선두주자'
               desc1='대한민국 이륜차 렌트 점유율 1위'
               desc2='국내 최대 규모의 서비스 네트워크 보유'
@@ -62,7 +66,7 @@ const Recruit = () => {
             <style.RecruitImg data-aos="fade-up" data-aos-duration="1800">
               <img src="/images/recruit_05.png" alt="바이크뱅크의 성장 이미지" />
             </style.RecruitImg>
-            <TitleList
+            <component.TitleList
               subtitle='매출로 알아보는 성장력'
               desc1='설립 3년만에 매출액 12배 증가'
               desc2='시장을 선도하는 성장 속도'

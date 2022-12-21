@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { PageWidth } from '../pages/Home/style';
-import { mobileContext } from '../utils/mobileContext';
+import { PageWidth } from '../../pages/Home/style';
+import { mobileContext } from '../../utils/mobileContext';
 
 const SubTitleSection = ({ title, background, color, desc }) => {
   const { scrollPosition } = useContext(mobileContext);

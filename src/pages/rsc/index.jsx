@@ -1,44 +1,39 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-
+import RentOption from '../../components/rent/RentOption';
+import RentService from '../../components/rent/RentService';
+import RscCaseItem from '../../components/rent/RscCaseItem';
+import SubNavigation from '../../components/common/SubNavigation';
+import SubTitleSection from '../../components/SubTitleSection';
+import TitleList from '../../components/TitleList';
+import { mobileContext } from '../../utils/mobileContext';
+import { rentList01, rentList02, rentList04, rscCaseList } from '../../utils/rent/rentlist'
 import * as homeStyle from '../Home/style';
 import * as style from './styles';
-import * as utils from '../../utils';
-import * as component from '../../components'
-
 import AOS from 'aos';
 
-
 const Rent = () => {
-  // subnavigatio 의 dom 요소를 가져옴
   const pageRef = useRef([]);
-  // subnavigation의 정보
   const subNavList = [
     {
       listname: '이용안내',
-      height: pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset - 100,
+      height: pageRef.current[0]?.getBoundingClientRect().height,
     },
     {
       listname: '상품안내',
-      height: pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset - 100,
+      height: pageRef.current[1]?.getBoundingClientRect().height,
     },
     {
       listname: '보장안내',
-      height: pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset - 100,
+      height: pageRef.current[2]?.getBoundingClientRect().height,
     },
     {
       listname: '서비스 안내',
-      height: pageRef.current[3]?.getBoundingClientRect().top + window.pageYOffset - 100,
+      height: pageRef.current[3]?.getBoundingClientRect().height,
     },
   ];
 
   // 모바일 여부
-  const { isMobile } = useContext(utils.mobileContext);
-  // url 파라미터값 가져오기
-  const { id } = useParams();
-  // url 이동을 위한 변수
-  const navigate = useNavigate();
-
+  const { isMobile } = useContext(mobileContext);
   // 몇번째 탭을 누르고 있는지 알기위한 상태
   const [currentTab, setCurrentTab] = useState(0);
   const [serviceTab, setServiceTab] = useState(0);
@@ -46,31 +41,23 @@ const Rent = () => {
   useEffect(() => {
     // 스크롤 이벤트를 위한 초기설정
     AOS.init({ duration: 1800 });
-
-    // 경로에 따른 위치설정
-    if (id == 1) return window.scrollTo(0, pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset + 100)
-    if (id == 2) return window.scrollTo(0, pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset + 100)
-    if (id == 3) return window.scrollTo(0, pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset + 100)
-    if (id == 4) return window.scrollTo(0, pageRef.current[3]?.getBoundingClientRect().top + window.pageYOffset + 100)
-    if (!id) return window.scrollTo(0, 0)
-  }, [id]);
+    // 스크롤 최상단 위치
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <>
-      {/* 메타태그 */}
-      <component.MetaTag title=':: 바이크뱅크 - 렌트소개 ::' keywords='바이크뱅크 렌트소개' description='바이크뱅크 렌트소개' author=', 바이크뱅크' subject='바이크뱅크 렌트소개' copyright='Copyrights 2020 BIKE BANK' url='http://www.bikebank.kr/rent' imgsrc='/images/snail' />
-
       {/* 공통 헤더부분 */}
-      <component.SubTitleSection title="렌트상품" />
-      <component.SubNavigation pageRef={pageRef} navlist={subNavList} />
+      <SubTitleSection title="렌트상품" />
+      <SubNavigation pageRef={pageRef} navlist={subNavList} />
 
       {/* 01. 렌트이용안내 */}
       <homeStyle.Section
-        padding={isMobile ? "55px 0 100px 0" : "100px 0 220.5px 0"}
+        padding={isMobile ? "55px 0 100px 0" : "70px 0 220.5px 0"}
         ref={(el) => (pageRef.current[0] = el)}
       >
         <homeStyle.PageWidth>
-          <component.TitleList
+          <TitleList
             number="01"
             subtitle="렌트 이용 안내"
             bold={!isMobile && "계약부터 신청까지 간편하게 이용하세요."}
@@ -84,7 +71,7 @@ const Rent = () => {
           </div>
           }
           <style.RentList isMobile={isMobile} data-aos="fade-up" data-aos-duration="1800" >
-            {utils.rentList01.map((item) => (
+            {rentList01.map((item) => (
               <li key={item.id}>
                 <p className="number">{item.id}</p>
                 <p>
@@ -101,7 +88,6 @@ const Rent = () => {
             isCenter={!isMobile}
             padding={isMobile ? '12px 0' : '19px 79px'}
             maxWidth={isMobile && '180px'}
-            onClick={() => navigate('/customer/1')}
           >
             이용문의
           </homeStyle.Button>
@@ -115,7 +101,7 @@ const Rent = () => {
         background={isMobile && '#f8f8f8'}
       >
         <homeStyle.PageWidth gap={isMobile && '0'}>
-          <component.TitleList
+          <TitleList
             number="02"
             subtitle="상품 안내"
             bold="옵션에 대해 알려드립니다."
@@ -124,11 +110,11 @@ const Rent = () => {
 
           {/* 모바일 유무에 따른 화면배치 변경 */}
           {isMobile ? (
-            <component.RentOption data-aos="fade-up" />
+            <RentOption data-aos="fade-up" />
           ) : (
             <>
               <style.RentOptionList data-aos="fade-up" data-aos-duration="1800">
-                {utils.rentList02.map((item) => (
+                {rentList02.map((item) => (
                   <li
                     key={item.id}
                     className={currentTab === item.id ? 'active' : ''}
@@ -139,7 +125,7 @@ const Rent = () => {
                 ))}
               </style.RentOptionList>
               <style.RnetOptionCont data-aos="fade-up" data-aos-duration="1800">
-                <img src={utils.rentList02[currentTab].imgUrl} alt="렌트이미지" />
+                <img src={rentList02[currentTab].imgUrl} alt="렌트이미지" />
               </style.RnetOptionCont>
             </>
           )}
@@ -152,7 +138,7 @@ const Rent = () => {
         ref={(el) => (pageRef.current[2] = el)}
       >
         <homeStyle.PageWidth>
-          <component.TitleList
+          <TitleList
             number="03"
             subtitle="사고 보장 안내"
             bold="바이크뱅크의 RCS (Rider Care System)"
@@ -196,7 +182,7 @@ const Rent = () => {
       {/* rsc 보장 범위 시작 */}
       <homeStyle.Section background={isMobile ? "#fff" : "#f8f8f8"} padding={isMobile ? "0 0 150px 0" : "104.5px 0 185.5px 0"}>
         <homeStyle.PageWidth>
-          {isMobile ? <component.TitleList noneNum subtitle="RCS 보장 범위" /> : <component.TitleList noneNum nonSubtitle noDesc bold="RCS 보장 범위" />}
+          {isMobile ? <TitleList noneNum subtitle="RCS 보장 범위" /> : <TitleList noneNum nonSubtitle noDesc bold="RCS 보장 범위" />}
           {!isMobile && <p className="rscdesc">&lt;남자 30세 이상 유상보험 기준 비교&gt;</p>}
         </homeStyle.PageWidth>
         <homeStyle.Area>
@@ -219,7 +205,6 @@ const Rent = () => {
             </>
           )}
           <homeStyle.Button
-            onClick={() => navigate(`/rent/insu`)}
             background={isMobile ? "#999999" : "#434343"}
             color="#fff"
             maxWidth="250px"
@@ -234,10 +219,10 @@ const Rent = () => {
         <homeStyle.PageWidth>
 
           {/* 실제 보장사례 토글 메뉴 */}
-          <component.TitleList noneNum noDesc subtitle='실제 보장사례' />
+          <TitleList noneNum noDesc subtitle='실제 보장사례' />
           <style.RscCaseList data-aos="fade-up" data-aos-duration="1800" >
-            {utils.rscCaseList.map(item => (
-              <component.RscCaseItem item={item} key={item.id} />
+            {rscCaseList.map(item => (
+              <RscCaseItem item={item} key={item.id} />
             ))}
           </style.RscCaseList>
         </homeStyle.PageWidth>
@@ -250,13 +235,13 @@ const Rent = () => {
         ref={(el) => (pageRef.current[3] = el)}
       >
         <homeStyle.PageWidth>
-          <component.TitleList number="04" bold="렌트차 서비스 안내" />
+          <TitleList number="04" bold="렌트차 서비스 안내" />
           {isMobile ? (
-            <component.RentService />
+            <RentService />
           ) : (
             <React.Fragment >
               <style.RentOptionList width="50%" data-aos="fade-up" data-aos-duration="1800" >
-                {utils.rentList04.map((item) => (
+                {rentList04.map((item) => (
                   <li
                     key={item.id}
                     className={item.id === serviceTab ? 'active' : ''}
@@ -267,7 +252,7 @@ const Rent = () => {
                 ))}
               </style.RentOptionList>
               <style.RnetOptionCont data-aos="fade-up" data-aos-duration="1800" >
-                <img src={utils.rentList04[serviceTab].imgUrl} alt="렌트 서비스 이미지" />
+                <img src={rentList04[serviceTab].imgUrl} alt="렌트 서비스 이미지" />
               </style.RnetOptionCont>
             </React.Fragment>
           )}

@@ -1,28 +1,39 @@
 import React, { useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 import * as homestyle from '../../Home/style';
 import * as style from './styles';
-// swiper 사용을 위한 import 
+import * as utils from '../../../utils';
+import * as component from '../../../components'
+
 import { SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation, Autoplay } from 'swiper';
-import { useParams } from 'react-router-dom';
-import { mobileContext } from '../../../utils/mobileContext';
 
 
 const SaleBike = () => {
     // url 파라미터값을 가져온다.
     const { id } = useParams();
     // 모바일 유무 확인
-    const { isMobile } = useContext(mobileContext)
+    const { isMobile } = useContext(utils.mobileContext)
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [])
+    }, []);
+
     return (
         <>
+            {/* 메타태그 */}
+            {/* vsx125일때 */}
+            <component.MetaTag title=':: 신차소개 - VSX 125 ::' keywords={'신차소개 - VSX 125'} description='신차소개 - VSX 125' author=', 바이크뱅크' subject='신차소개 - VSX 125' copyright='Copyrights 2020 BIKE BANK' url='http://www.bikebank.kr/sale/VSX125' imgsrc='/images/snail' />
+            {/* vs 125일때 */}
+            <component.MetaTag title=':: 신차소개 - VS 125 ::' keywords={'신차소개 - VS 125'} description='신차소개 - VS 125' author=', 바이크뱅크' subject='신차소개 - VS 125' copyright='Copyrights 2020 BIKE BANK' url='http://www.bikebank.kr/sale/VS125' imgsrc='/images/snail' />
+            {/* vs 300일때 */}
+            <component.MetaTag title=':: 신차소개 - VS 300 ::' keywords={'신차소개 - VS 300'} description='신차소개 - VS 300' author=', 바이크뱅크' subject='신차소개 - VS 300' copyright='Copyrights 2020 BIKE BANK' url='http://www.bikebank.kr/sale/VS300' imgsrc='/images/snail' />
+
             <homestyle.Section padding={isMobile ? '0 0 13px 0' : '0 0 113px 0'}>
                 {/* vs 125 일때 */}
-                {id === 'vs125' && (
+                {id === 'VS125' && (
                     <>
                         {/* 모바일 일때 */}
                         {isMobile && (
@@ -89,7 +100,7 @@ const SaleBike = () => {
                 )}
 
                 {/* vs300일때 */}
-                {id === 'vs300' && (
+                {id === 'VS300' && (
                     <>
                         {isMobile &&
                             <>
@@ -151,18 +162,18 @@ const SaleBike = () => {
                 )}
 
                 {/* vsx125일때 */}
-                {id === 'vsx125' && (
+                {id === 'VSX125' && (
                     <>
                         {isMobile ? (
                             <style.Top>
                                 <img src="/images/mobile_vsx_125_header.png" alt="vsx이미지" style={{ width: '100%', marginBottom: '116px' }} />
-                                <iframe width="337" height="300" src="https://www.youtube.com/embed/MShNfdOX0Xo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style={{ margin: '0 auto' }}></iframe>
+                                <iframe width="337" height="300" src="https://www.youtube.com/embed/MShNfdOX0Xo" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ margin: '0 auto' }}></iframe>
                                 <img src='/images/mobile_vsx_125_feature.png' alt='vsx feature 이미지' style={{ width: '100%', marginTop: '77px' }} />
                             </style.Top>
                         ) : (
                             <style.Top>
                                 <img src="/images/vsx_125_01.png" alt="vsx이미지" style={{ width: '100%', marginBottom: '116px' }} />
-                                <iframe width="938" height="435" src="https://www.youtube.com/embed/MShNfdOX0Xo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style={{ margin: '0 auto' }}></iframe>
+                                <iframe width="938" height="435" src="https://www.youtube.com/embed/MShNfdOX0Xo" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ margin: '0 auto' }}></iframe>
                                 <homestyle.PageWidth>
                                     <img src='/images/vsx_125_features.png' alt='vsx feature 이미지' style={{ width: '100%', marginTop: '77px' }} />
                                 </homestyle.PageWidth>

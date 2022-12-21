@@ -1,20 +1,17 @@
 import React, { useContext, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 
-import SubNavigation from '../../components/SubNavigation';
-import SubTitleSection from '../../components/SubTitleSection';
-import TitleList from '../../components/TitleList';
-import { Area, PageWidth, Section } from '../Home/style';
-import ImgList from '../../components/ImgList';
-import CompanySlide from '../../components/CompanySlide';
-import { mobileContext } from '../../utils/mobileContext';
-import { companyList01, companyList02, companyList03, mobileCompanyList } from '../../utils/company/companylist'
+import * as component from '../../components'
+import * as utils from '../../utils';
+import * as homestyle from '../Home/style';
 import * as style from './styles';
 
 import AOS from 'aos';
-import { useParams } from 'react-router-dom';
-import MetaTag from '../../utils/MetaTag';
+
 const Company = () => {
+  // subnavigatio 의 dom 요소를 가져옴
   const pageRef = useRef([]);
+  // subnavigation의 정보
   const subNavList = [
     {
       listname: '바이크뱅크',
@@ -31,7 +28,7 @@ const Company = () => {
   ];
 
   // 모바일 여부
-  const { isMobile } = useContext(mobileContext);
+  const { isMobile } = useContext(utils.mobileContext);
 
   // url 파라미터값 가져오기
   const { id } = useParams();
@@ -40,7 +37,7 @@ const Company = () => {
     // 스크롤 이벤트를 위한 초기설정
     AOS.init({ duration: 1800 });
 
-    // 경로에 따른 위치설정
+    // 경로에 따른 스크롤위치설정
     if (id == 1) return window.scrollTo(0, pageRef.current[0]?.getBoundingClientRect().top + window.pageYOffset + 100)
     if (id == 2) return window.scrollTo(0, pageRef.current[1]?.getBoundingClientRect().top + window.pageYOffset + 100)
     if (id == 3) return window.scrollTo(0, pageRef.current[2]?.getBoundingClientRect().top + window.pageYOffset + 100)
@@ -49,19 +46,19 @@ const Company = () => {
   return (
     <>
       {/* 메타태그 */}
-      <MetaTag title=':: 바이크뱅크 - 회사소개 ::' />
+      <component.MetaTag title=':: 바이크뱅크 - 회사소개 ::' keywords='바이크뱅크 회사소개' description='바이크뱅크 회사소개' author=', 바이크뱅크' subject='바이크뱅크 회사소개' copyright='Copyrights 2020 BIKE BANK' url='http://www.bikebank.kr/company' imgsrc='/images/snail' />
 
       {/* 공통 헤더부분 */}
-      <SubTitleSection title="회사소개" />
-      <SubNavigation pageRef={pageRef} navlist={subNavList} />
+      <component.SubTitleSection title="회사소개" />
+      <component.SubNavigation pageRef={pageRef} navlist={subNavList} />
 
       {/* 01. 끊임없이 진화하는 종합 이륜차 솔루션 기업 */}
-      <Section
+      <homestyle.Section
         padding={isMobile ? '55px 0 99.5px 0' : '100px 0 143px 0'}
         ref={(el) => (pageRef.current[0] = el)}
       >
-        <PageWidth>
-          <TitleList
+        <homestyle.PageWidth>
+          <component.TitleList
             number="01"
             subtitle={isMobile ? "끊임없이 진화하는" : "바이크뱅크"}
             bold={isMobile ? "종합 이륜차 솔루션 기업" : "끊임없이 진화하는 종합 이륜차 솔루션 기업"}
@@ -72,8 +69,9 @@ const Company = () => {
             noDesc={isMobile}
           />
           <style.CompanyListWrap>
-            {companyList01.map((item, index) => (
-              <ImgList
+            {utils.companyList01.map((item, index) => (
+              <component.ImgList
+                key={index}
                 imgsrc={item.imgsrc}
                 alt={item.alt}
                 title={item.title}
@@ -84,16 +82,16 @@ const Company = () => {
               />
             ))}
           </style.CompanyListWrap>
-        </PageWidth>
-      </Section>
+        </homestyle.PageWidth>
+      </homestyle.Section>
 
       {/* 01-02 핵심 경쟁력  */}
-      <Section
+      <homestyle.Section
         background={isMobile ? '#fff' : '#f8f8f8'}
         padding={isMobile ? '49px 0 101.5px 0' : '0 0 145.5px 0'}
       >
-        <PageWidth>
-          <TitleList
+        <homestyle.PageWidth>
+          <component.TitleList
             bold="핵심 경쟁력"
             desc1="전문성과 업계 경험을 바탕으로"
             desc2="고객에게 종합 이륜차 솔루션을 제공합니다."
@@ -130,16 +128,16 @@ const Company = () => {
               <p>다양한 노하우를 보유하고 있습니다.</p>
             </li>
           </style.CompetitionList>
-        </PageWidth>
-      </Section>
+        </homestyle.PageWidth>
+      </homestyle.Section>
 
       {/* 03. 도전과 성과 */}
-      <Section
+      <homestyle.Section
         backgroundImg="url('/images/challenge_bg.png')"
         padding={isMobile ? '50px 0 100.5px 0' : '18px 0 159.5px 0'}
       >
-        <PageWidth>
-          <TitleList bold="도전과 성과" />
+        <homestyle.PageWidth>
+          <component.TitleList bold="도전과 성과" />
           <style.ChallengeList>
             <li data-aos="fade-up" data-aos-delay="0">
               <p>2021.</p>
@@ -170,16 +168,16 @@ const Company = () => {
               <p>바이크뱅크 법인 설립</p>
             </li>
           </style.ChallengeList>
-        </PageWidth>
-      </Section>
+        </homestyle.PageWidth>
+      </homestyle.Section>
 
       {/* 02. 비즈니스를 변화시키는 편리한 기술 */}
-      <Section
+      <homestyle.Section
         padding={isMobile ? '55px 0 100px 0' : '219px 0 166px 0'}
         ref={(el) => (pageRef.current[1] = el)}
       >
-        <PageWidth>
-          <TitleList
+        <homestyle.PageWidth>
+          <component.TitleList
             number="02"
             subtitle={!isMobile && "비즈니스를 변화시키는"}
             bold={isMobile ? "비즈니스를 변화시키는" : "편리한 기술"}
@@ -190,8 +188,8 @@ const Company = () => {
             noDesc={isMobile}
           />
           <style.CompanyListWrap>
-            {companyList02.map((item, index) => (
-              <ImgList
+            {utils.companyList02.map((item, index) => (
+              <component.ImgList
                 key={index}
                 width50
                 imgsrc={item.imgsrc}
@@ -203,16 +201,16 @@ const Company = () => {
               />
             ))}
           </style.CompanyListWrap>
-        </PageWidth>
-      </Section>
+        </homestyle.PageWidth>
+      </homestyle.Section>
 
       {/* 02-2. 차량신청과 관리 */}
-      <Section
+      <homestyle.Section
         padding={isMobile ? '50px 0 80.5px 0' : '176.5px 0 156.5px 0'}
         background="#f8f8f8"
       >
-        <PageWidth>
-          <TitleList
+        <homestyle.PageWidth>
+          <component.TitleList
             noneNum
             subtitle={isMobile && "차량 신청과 관리"}
             bold={!isMobile && "차량 신청과 관리"}
@@ -220,8 +218,8 @@ const Company = () => {
             desc2={!isMobile && "별도의 절차 없이 어디서나 차량 신청 및 관리가 가능합니다."}
           />
           <style.CompanyListWrap>
-            {companyList03.map((item, index) => (
-              <ImgList
+            {utils.companyList03.map((item, index) => (
+              <component.ImgList
                 key={index}
                 imgsrc={item.imgsrc}
                 alt={item.alt}
@@ -236,22 +234,22 @@ const Company = () => {
               />
             ))}
           </style.CompanyListWrap>
-        </PageWidth>
-      </Section>
+        </homestyle.PageWidth>
+      </homestyle.Section>
 
       {/* 02-3. 차량 공급 시스템 */}
       {/* 모바일일때 */}
       {isMobile ? (
-        <Section padding="52px 0 155px 0">
-          <PageWidth>
-            <TitleList
+        <homestyle.Section padding="52px 0 155px 0">
+          <homestyle.PageWidth>
+            <component.TitleList
               noneNum
               bold="차량 공급 시스템"
               desc1="고객에게 빠르게 차량을 공급하기 위하여"
               desc2="차량 신청 후 출고까지 최적화 된 시스템을"
               desc3="구축하였습니다."
             />
-          </PageWidth>
+          </homestyle.PageWidth>
           <img
             data-aos="fade-up"
             src="/images/mobile_company_01.png"
@@ -259,13 +257,13 @@ const Company = () => {
             className="imgWidth100"
             style={{ marginTop: '30px' }}
           />
-        </Section>
+        </homestyle.Section>
       ) : (
         <>
           {/* 웹일때 */}
-          <Section padding={isMobile ? '52px 0 100px 0' : '103px 0 189px 0'}>
-            <PageWidth>
-              <TitleList
+          <homestyle.Section padding={isMobile ? '52px 0 100px 0' : '103px 0 189px 0'}>
+            <homestyle.PageWidth>
+              <component.TitleList
                 noneNum
                 nonSubtitle
                 bold="차량 공급 시스템"
@@ -278,21 +276,21 @@ const Company = () => {
                 alt="차량 공급 시스템"
                 className="imgWidth100"
               />
-            </PageWidth>
-          </Section>
+            </homestyle.PageWidth>
+          </homestyle.Section>
         </>
       )}
 
       {/* 03. 출고부터 수거까지 준비된 이륜차 인프라*/}
-      <Section
+      <homestyle.Section
         padding={isMobile ? '55px 0 150px 0' : '103px 0 215px 0'}
         ref={(el) => (pageRef.current[2] = el)}
       >
-        <PageWidth>
+        <homestyle.PageWidth>
           {isMobile ? (
             // 모바일일때
             <>
-              <TitleList
+              <component.TitleList
                 number="03"
                 subtitle="출고부터 수거까지"
                 bold="준비된 이륜차 인프라"
@@ -300,8 +298,8 @@ const Company = () => {
                 desc2="차량 이용의 모든 과정에서 바이크뱅크의 관리를 받을 수 있습니다."
               />
               <style.CompanyListWrap>
-                {mobileCompanyList.map((item, index) => (
-                  <ImgList
+                {utils.mobileCompanyList.map((item, index) => (
+                  <component.ImgList
                     key={index}
                     imgsrc={item.imgsrc}
                     alt={item.alt}
@@ -315,34 +313,34 @@ const Company = () => {
           ) : (
             // 웹일때
             <>
-              <TitleList
+              <component.TitleList
                 number="03"
                 subtitle="출고부터 수거까지"
                 bold="준비된 이륜차 인프라"
                 desc1="생활 속 편안한 주행 경험을 위해"
                 desc2="차량 이용의 모든 과정에서 바이크뱅크의 관리를 받을 수 있습니다."
               />
-              <CompanySlide />
+              <component.CompanySlide />
             </>
           )}
-        </PageWidth>
-      </Section>
+        </homestyle.PageWidth>
+      </homestyle.Section>
 
       {/* 03-2. 서비스망 */}
-      <Section
+      <homestyle.Section
         padding={isMobile ? '50px 0 100px 0' : '116.5px 0 156px 0'}
         background="#f8f8f8"
       >
-        <PageWidth>
-          <TitleList
+        <homestyle.PageWidth>
+          <component.TitleList
             noneNum
             subtitle={isMobile ? "권역별 물류 거점으로" : "420개 이상의"}
             bold={isMobile ? "이륜차 인프라 확보" : "서비스망으로 확실하게"}
             desc1={isMobile ? "전국 어디에나 차량의 이동과 관리" : "권역별로 서비스망을 확보하여 이륜차 운용에 필요한"}
             desc2={!isMobile && "소모품 교환과 사고발생 수리를 책임집니다."}
           />
-        </PageWidth>
-        <Area>
+        </homestyle.PageWidth>
+        <homestyle.Area>
           <img
             data-aos="fade-up"
             src={
@@ -352,8 +350,8 @@ const Company = () => {
             }
             alt="서비스망 이미지"
           />
-        </Area>
-        <PageWidth>
+        </homestyle.Area>
+        <homestyle.PageWidth>
           <style.Arealist isScroll={isMobile}>
             <li data-aos="fade-up" data-aos-delay="0">
               <img
@@ -400,8 +398,8 @@ const Company = () => {
               <p>대구정비센터</p>
             </li>
           </style.Arealist>
-        </PageWidth>
-      </Section>
+        </homestyle.PageWidth>
+      </homestyle.Section>
     </>
   );
 };

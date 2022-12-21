@@ -1,21 +1,17 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import Introduction from '../../components/sale/Introduction';
-import MobileOption from '../../components/sale/MobileOption';
-import Option from '../../components/sale/Option';
-import Service from '../../components/sale/Service';
-import SubNavigation from '../../components/SubNavigation';
-import SubTitleSection from '../../components/SubTitleSection';
-import TitleList from '../../components/TitleList';
-import { mobileContext } from '../../utils/mobileContext';
-import { serviceList } from '../../utils/sale/salelist';
-import AOS from 'aos'
-import * as homeStyle from '../Home/style';
-import * as style from './styles';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import * as homeStyle from '../Home/style';
+import * as style from './styles';
+import * as component from '../../components'
+import * as utils from '../../utils';
+
+import AOS from 'aos'
+
 const Sale = () => {
-  // 공통 네비게이션 관리부분
+  // subnavigatio 의 dom 요소를 가져옴
   const pageRef = useRef([]);
+  // subnavigation의 정보
   const subNavList = [
     {
       listname: '라인업',
@@ -31,7 +27,7 @@ const Sale = () => {
     },
   ];
   // 모바일 유무 확인
-  const { isMobile } = useContext(mobileContext);
+  const { isMobile } = useContext(utils.mobileContext);
 
   // url 파라미터값 가져오기
   const { id } = useParams();
@@ -48,14 +44,17 @@ const Sale = () => {
   }, [id])
 
   return <>
+    {/* 메타태그 */}
+    <component.MetaTag title=':: 바이크뱅크 - 차량판매 ::' keywords='바이크뱅크 차량판매' description='바이크뱅크 차량판매' author=', 바이크뱅크' subject='바이크뱅크 차량판매' copyright='Copyrights 2020 BIKE BANK' url='http://www.bikebank.kr/sale' imgsrc='/images/snail' />
+
     {/* 공통 헤더부분 */}
-    <SubTitleSection title="차량판매" />
-    <SubNavigation pageRef={pageRef} navlist={subNavList} />
+    <component.SubTitleSection title="차량판매" />
+    <component.SubNavigation pageRef={pageRef} navlist={subNavList} />
 
     {/* 01. 완성차 라인업 */}
     <homeStyle.Section padding={isMobile ? '55px 0 0 0' : '100px 0 52px 0'} ref={el => pageRef.current[0] = el}>
       <homeStyle.PageWidth>
-        <TitleList
+        <component.TitleList
           number="01"
           subtitle="판매용 완성차 라인업"
           bold={!isMobile && "바이크뱅크의 판매 전용 차량을 소개합니다."}
@@ -67,14 +66,14 @@ const Sale = () => {
     {/* 컨텐츠 색이 달라서 따로 섹션 나눔 */}
     <homeStyle.Section padding={isMobile ? '0 0 100px 0' : '0 0 168px 0'} background={!isMobile && '#f8f8f8'}>
       <homeStyle.PageWidth>
-        <Introduction />
+        <component.Introduction />
       </homeStyle.PageWidth>
     </homeStyle.Section>
 
     {/* 02. 보증정책 */}
     <homeStyle.Section padding={isMobile ? '55px 0 100px 0' : '233px 0 103px 0'} ref={el => pageRef.current[1] = el}>
       <homeStyle.PageWidth>
-        <TitleList
+        <component.TitleList
           number="02"
           subtitle={!isMobile && "보증 정책"}
           bold={isMobile ? "보증 정책" : "안전하고 만족스러운 서비스를 제공하겠습니다."}
@@ -83,7 +82,7 @@ const Sale = () => {
         />
         {/* 모바일 유무에 따른 화면배치 변경 */}
         {isMobile ? (
-          <MobileOption
+          <component.MobileOption
             title1='제품보증기간'
             desc1='신차 구입 후 부품에 따라 1~2년 이내,<br/>또는 주행거리 10,000~20,000km<br/>(선도래 조건)'
             title2='보증대상부품'
@@ -93,10 +92,10 @@ const Sale = () => {
         ) : (
           <>
             <style.OptionList>
-              <Option title='제품보증기간' desc='신차 구입 후 부품에 따라 1~2년 이내,<br/>또는 주행거리 10,000~20,000km<br/>(선도래 조건)' margin='0 0 20px 0'
+              <component.Option title='제품보증기간' desc='신차 구입 후 부품에 따라 1~2년 이내,<br/>또는 주행거리 10,000~20,000km<br/>(선도래 조건)' margin='0 0 20px 0'
                 delay='0'
               />
-              <Option title='보증대상부품' desc='모터사이클을 구성하는 모든 부품<br/>(단 소모성 부품 및 유지류는 제외)' margin='0 0 20px 0'
+              <component.Option title='보증대상부품' desc='모터사이클을 구성하는 모든 부품<br/>(단 소모성 부품 및 유지류는 제외)' margin='0 0 20px 0'
                 delay='100'
               />
             </style.OptionList>
@@ -110,7 +109,7 @@ const Sale = () => {
     {/* 컨텐츠 색이 달라서 따로 섹션 나눔 */}
     <homeStyle.Section padding={isMobile ? '50px 0 83px 0' : '132px 0'} background='#f8f8f8' >
       <homeStyle.PageWidth>
-        <TitleList
+        <component.TitleList
           subtitle={isMobile && "관리 어플리케이션"}
           bold={!isMobile && "관리 어플리케이션"}
           desc1='전용 APP을 통해 고객님에게 차량 관리 서비스를 제공하고 있습니다.'
@@ -120,7 +119,7 @@ const Sale = () => {
           nonSubtitle
         />
         {isMobile ? (
-          <MobileOption
+          <component.MobileOption
             title1='APP 설치 및 등록'
             desc1='신차 구입 후 동봉된 QR코드를 이용하여<br/>APP설치 후 신차 등록'
             title2='등록 혜택'
@@ -129,11 +128,11 @@ const Sale = () => {
           />
         ) : (
           <style.OptionList>
-            <Option title='APP 설치 및 등록' desc='신차 구입 후 동봉된 QR코드를 이용하여<br/>APP설치 후 신차 등록' mb='50px'
+            <component.Option title='APP 설치 및 등록' desc='신차 구입 후 동봉된 QR코드를 이용하여<br/>APP설치 후 신차 등록' mb='50px'
               delay='0'
               margin='0 0 50px 0'
             />
-            <Option title='등록 혜택' desc='체계적인 차량 관리를 위한 정보 제공과<br/>정기점검 쿠폰 및 무상 오일 교환' mb='50px'
+            <component.Option title='등록 혜택' desc='체계적인 차량 관리를 위한 정보 제공과<br/>정기점검 쿠폰 및 무상 오일 교환' mb='50px'
               delay='100'
               margin='0 0 50px 0'
             />
@@ -151,10 +150,11 @@ const Sale = () => {
         </style.App>
       </homeStyle.PageWidth>
     </homeStyle.Section>
+
     {/* 03. 차량 서비스 안내 */}
     < homeStyle.Section padding={isMobile ? '55px 0 92px 0' : '210px 0 364.5px 0'} ref={el => pageRef.current[2] = el} >
       <homeStyle.PageWidth>
-        <TitleList
+        <component.TitleList
           number="03"
           subtitle={isMobile && "차량 서비스 안내"}
           bold={!isMobile && "차량 서비스 안내"}
@@ -162,7 +162,7 @@ const Sale = () => {
           nonSubtitle
         />
         <style.ServiceWrap data-aos="fade-up" data-aos-duration="1800">
-          {serviceList.map(item => <Service key={item.id} title={item.title} desc={item.desc} />)}
+          {utils.serviceList.map((item) => <component.Service key={item.id} title={item.title} desc={item.desc} />)}
         </style.ServiceWrap>
         <style.Button onClick={() => navigate(`/customer/2`)}>판매/서비스점 찾기</style.Button>
       </homeStyle.PageWidth>

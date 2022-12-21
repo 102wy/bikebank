@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as style from './style';
-import HomeSectionTitle from '../../components/HomeSectionTitle';
-import HomeCheckList from '../../components/HomeCheckList';
+import HomeSectionTitle from '../../components/home/HomeSectionTitle';
+import HomeCheckList from '../../components/home/HomeCheckList';
 import { mobileContext } from './../../utils/mobileContext';
 import CountUp from 'react-countup';
 import AOS from 'aos';
